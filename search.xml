@@ -61,7 +61,7 @@
 <li><p>apply <a href="prometheus/prometheus-tls.yaml">prometheus configuration</a> file</p>
   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl apply -f prometheus-tls.yaml</span><br></pre></td></tr></table></figure></li>
 </ul>
-]]></content>
+<span id="more"></span>]]></content>
       <categories>
         <category>test</category>
       </categories>
