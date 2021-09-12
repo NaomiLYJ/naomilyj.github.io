@@ -46,6 +46,7 @@
     <content><![CDATA[<h2 id="Installing-Prometheus-and-Grafana"><a href="#Installing-Prometheus-and-Grafana" class="headerlink" title="Installing Prometheus and Grafana"></a>Installing Prometheus and Grafana</h2><ul>
 <li>since the prometheus and grafana avaliable with istio is just for demo purposes we will deploy our own promethues and grafana using helm with persistance storage. </li>
 </ul>
+<span id="more"></span>
 <h3 id="Install-Helm"><a href="#Install-Helm" class="headerlink" title="Install Helm"></a>Install Helm</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3</span><br><span class="line">$ chmod 700 get_helm.sh</span><br><span class="line">$ ./get_helm.sh</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
 <h3 id="Use-Helm"><a href="#Use-Helm" class="headerlink" title="Use Helm"></a>Use Helm</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">helm repo add stable https://charts.helm.sh/stable</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -61,7 +62,7 @@
 <li><p>apply <a href="prometheus/prometheus-tls.yaml">prometheus configuration</a> file</p>
   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl apply -f prometheus-tls.yaml</span><br></pre></td></tr></table></figure></li>
 </ul>
-<span id="more"></span>]]></content>
+]]></content>
       <categories>
         <category>test</category>
       </categories>

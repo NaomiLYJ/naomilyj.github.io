@@ -229,7 +229,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-09-12 14:58:33 / Modified: 15:45:41" itemprop="dateCreated datePublished" datetime="2021-09-12T14:58:33+00:00">2021-09-12</time>
+      <time title="Created: 2021-09-12 14:58:33 / Modified: 15:47:02" itemprop="dateCreated datePublished" datetime="2021-09-12T14:58:33+00:00">2021-09-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -268,21 +268,6 @@
     <div class="post-body" itemprop="articleBody">
           <h2 id="Installing-Prometheus-and-Grafana"><a href="#Installing-Prometheus-and-Grafana" class="headerlink" title="Installing Prometheus and Grafana"></a>Installing Prometheus and Grafana</h2><ul>
 <li>since the prometheus and grafana avaliable with istio is just for demo purposes we will deploy our own promethues and grafana using helm with persistance storage. </li>
-</ul>
-<h3 id="Install-Helm"><a href="#Install-Helm" class="headerlink" title="Install Helm"></a>Install Helm</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3</span><br><span class="line">$ chmod 700 get_helm.sh</span><br><span class="line">$ ./get_helm.sh</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-<h3 id="Use-Helm"><a href="#Use-Helm" class="headerlink" title="Use Helm"></a>Use Helm</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helm repo add stable https://charts.helm.sh/stable</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Install-Prometheus"><a href="#Install-Prometheus" class="headerlink" title="Install Prometheus"></a>Install Prometheus</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f prometheus/pv.yaml</span><br><span class="line">kubectl apply -f prometheus/pvc.yaml</span><br><span class="line">helm upgrade --install --namespace monitoring --history-max 3 --wait -f prometheus/helm/values.yaml prometheus stable/prometheus</span><br><span class="line"></span><br><span class="line">$ export POD_NAME=$(kubectl get pods --namespace monitoring -l &quot;app=prometheus,component=server&quot; -o jsonpath=&quot;&#123;.items[0].metadata.name&#125;&quot;)</span><br><span class="line"></span><br><span class="line">$ kubectl --namespace monitoring port-forward $POD_NAME 9090</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Install-Grafana"><a href="#Install-Grafana" class="headerlink" title="Install Grafana"></a>Install Grafana</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f grafana/pv.yaml</span><br><span class="line">$ kubectl apply -f grafana/pvc.yaml</span><br><span class="line">$ helm upgrade --install --namespace monitoring --history-max 3 --wait -f grafana/helm/values.yaml grafana stable/grafana</span><br><span class="line"></span><br><span class="line">$ export POD_NAME=$(kubectl get pods --namespace monitoring -l &quot;app.kubernetes.io/name=grafana,app.kubernetes.io/instance=grafana&quot; -o jsonpath=&quot;&#123;.items[0].metadata.name&#125;&quot;)</span><br><span class="line"></span><br><span class="line">$ kubectl --namespace monitoring port-forward $POD_NAME 3000</span><br><span class="line"></span><br><span class="line">$ kubectl get secret --namespace monitoring grafana -o jsonpath=&quot;&#123;.data.admin-password&#125;&quot; | base64 --decode ; echo</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="Setup-Gateway"><a href="#Setup-Gateway" class="headerlink" title="Setup Gateway"></a>Setup Gateway</h3><ul>
-<li><p>apply <a href="grafana/grafana-tls.yaml">grafana configuration</a> file</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f grafana-tls.yaml</span><br></pre></td></tr></table></figure></li>
-<li><p>apply <a href="prometheus/prometheus-tls.yaml">prometheus configuration</a> file</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f prometheus-tls.yaml</span><br></pre></td></tr></table></figure></li>
 </ul>
           <!--noindex-->
             <div class="post-button">

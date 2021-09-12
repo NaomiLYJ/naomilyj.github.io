@@ -20,15 +20,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="Installing Prometheus and Grafana since the prometheus and grafana avaliable with istio is just for demo purposes we will deploy our own promethues and grafana using helm with persistance storage.   I">
+<meta name="description" content="Installing Prometheus and Grafana since the prometheus and grafana avaliable with istio is just for demo purposes we will deploy our own promethues and grafana using helm with persistance storage.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hello Public">
 <meta property="og:url" content="http://example.com/2021/09/12/hello-public/index.html">
 <meta property="og:site_name" content="Yuanjing&#39;s Blog">
-<meta property="og:description" content="Installing Prometheus and Grafana since the prometheus and grafana avaliable with istio is just for demo purposes we will deploy our own promethues and grafana using helm with persistance storage.   I">
+<meta property="og:description" content="Installing Prometheus and Grafana since the prometheus and grafana avaliable with istio is just for demo purposes we will deploy our own promethues and grafana using helm with persistance storage.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-09-12T14:58:33.225Z">
-<meta property="article:modified_time" content="2021-09-12T15:45:41.879Z">
+<meta property="article:modified_time" content="2021-09-12T15:47:02.167Z">
 <meta property="article:author" content="Yuanjing Liu">
 <meta property="article:tag" content="journal">
 <meta property="article:tag" content="think">
@@ -238,7 +238,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-09-12 14:58:33 / Modified: 15:45:41" itemprop="dateCreated datePublished" datetime="2021-09-12T14:58:33+00:00">2021-09-12</time>
+      <time title="Created: 2021-09-12 14:58:33 / Modified: 15:47:02" itemprop="dateCreated datePublished" datetime="2021-09-12T14:58:33+00:00">2021-09-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -278,6 +278,7 @@
         <h2 id="Installing-Prometheus-and-Grafana"><a href="#Installing-Prometheus-and-Grafana" class="headerlink" title="Installing Prometheus and Grafana"></a>Installing Prometheus and Grafana</h2><ul>
 <li>since the prometheus and grafana avaliable with istio is just for demo purposes we will deploy our own promethues and grafana using helm with persistance storage. </li>
 </ul>
+<span id="more"></span>
 <h3 id="Install-Helm"><a href="#Install-Helm" class="headerlink" title="Install Helm"></a>Install Helm</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3</span><br><span class="line">$ chmod 700 get_helm.sh</span><br><span class="line">$ ./get_helm.sh</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
 <h3 id="Use-Helm"><a href="#Use-Helm" class="headerlink" title="Use Helm"></a>Use Helm</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helm repo add stable https://charts.helm.sh/stable</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -293,7 +294,7 @@
 <li><p>apply <a href="prometheus/prometheus-tls.yaml">prometheus configuration</a> file</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f prometheus-tls.yaml</span><br></pre></td></tr></table></figure></li>
 </ul>
-<span id="more"></span>
+
     </div>
 
     
