@@ -21,23 +21,30 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yuanjing&#39;s Blog">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="CephadmLayout10.0.2.7 iam02 &#x2F;dev&#x2F;sda mon10.0.2.4 openam01 &#x2F;dev&#x2F;sdc mon10.0.2.5 opendj01 &#x2F;dev&#x2F;sdb mon Prepare Environment Ntp Python3  Container Runtime ssh environment Repo Source  12345$ wget --silen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Install ceph with cephadm">
+<meta property="og:url" content="http://example.com/2021/10/05/cephadm/cephadm/index.html">
 <meta property="og:site_name" content="Yuanjing&#39;s Blog">
+<meta property="og:description" content="CephadmLayout10.0.2.7 iam02 &#x2F;dev&#x2F;sda mon10.0.2.4 openam01 &#x2F;dev&#x2F;sdc mon10.0.2.5 opendj01 &#x2F;dev&#x2F;sdb mon Prepare Environment Ntp Python3  Container Runtime ssh environment Repo Source  12345$ wget --silen">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-05T15:56:43.000Z">
+<meta property="article:modified_time" content="2021-10-23T16:59:06.164Z">
 <meta property="article:author" content="Yuanjing Liu">
+<meta property="article:tag" content="cloud">
+<meta property="article:tag" content="ceph">
+<meta property="article:tag" content="cephadm">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2021/10/05/cephadm/cephadm/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/10/05/cephadm/cephadm/","path":"2021/10/05/cephadm/cephadm/","title":"Install ceph with cephadm"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Yuanjing's Blog</title>
+<title>Install ceph with cephadm | Yuanjing's Blog</title>
   
 
 
@@ -129,7 +136,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -142,6 +149,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cephadm"><span class="nav-number">1.</span> <span class="nav-text">Cephadm</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Layout"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">Layout</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Prepare-Environment"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">Prepare Environment</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Installation"><span class="nav-number">1.0.1.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Initialization"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">Initialization</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Access-cluster"><span class="nav-number">1.0.1.0.2.</span> <span class="nav-text">Access cluster</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Add-other-nodes-to-cluster"><span class="nav-number">1.0.1.0.3.</span> <span class="nav-text">Add other nodes to cluster</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Deploy-osd"><span class="nav-number">1.0.1.0.4.</span> <span class="nav-text">Deploy osd</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Deploy-mds"><span class="nav-number">1.0.1.0.5.</span> <span class="nav-text">Deploy mds</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Ceph-CLI"><span class="nav-number">1.0.1.0.6.</span> <span class="nav-text">Ceph CLI</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#References"><span class="nav-number">1.0.2.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -195,16 +203,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/05/cephadm/cephadm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -217,9 +226,9 @@
       <meta itemprop="name" content="Yuanjing's Blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/05/cephadm/cephadm/" class="post-title-link" itemprop="url">Install ceph with cephadm</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Install ceph with cephadm
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -273,7 +282,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a>Cephadm</h2><h5 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h5><p>10.0.2.7 iam02 /dev/sda mon<br>10.0.2.4 openam01 /dev/sdc mon<br>10.0.2.5 opendj01 /dev/sdb mon</p>
+        <h2 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a>Cephadm</h2><h5 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h5><p>10.0.2.7 iam02 /dev/sda mon<br>10.0.2.4 openam01 /dev/sdc mon<br>10.0.2.5 opendj01 /dev/sdb mon</p>
 <h5 id="Prepare-Environment"><a href="#Prepare-Environment" class="headerlink" title="Prepare Environment"></a>Prepare Environment</h5><ul>
 <li>Ntp</li>
 <li>Python3 </li>
@@ -294,7 +303,6 @@
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zjz20/p/14136349.html">https://www.cnblogs.com/zjz20/p/14136349.html</a></li>
 </ol>
 
-      
     </div>
 
     
@@ -302,125 +310,27 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/cloud/" rel="tag"><i class="fa fa-tag"></i> cloud</a>
+              <a href="/tags/ceph/" rel="tag"><i class="fa fa-tag"></i> ceph</a>
+              <a href="/tags/cephadm/" rel="tag"><i class="fa fa-tag"></i> cephadm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/05/ceph/" rel="prev" title="Ceph">
+                  <i class="fa fa-chevron-left"></i> Ceph
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/05/ceph/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/luck.jpg">
-      <meta itemprop="name" content="Yuanjing Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuanjing's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/05/ceph/" class="post-title-link" itemprop="url">Ceph</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-10-05 15:29:45" itemprop="dateCreated datePublished" datetime="2021-10-05T15:29:45+00:00">2021-10-05</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-10-23 16:50:44" itemprop="dateModified" datetime="2021-10-23T16:50:44+00:00">2021-10-23</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/storage/" itemprop="url" rel="index"><span itemprop="name">storage</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>652</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>Ceph is an open source storage system, which supports 3 types of sorage:</p>
-<ul>
-<li>block storage: support snapshot</li>
-<li>file system: posix interface, support snapshot</li>
-<li>object storage: s3 compatible</li>
-</ul>
-<h3 id="Core-components-and-concepts"><a href="#Core-components-and-concepts" class="headerlink" title="Core components and concepts"></a>Core components and concepts</h3><img src="/2021/10/05/ceph/ceph-architecture.png" class="" title="Ceph Architecture">
-
-<ul>
-<li><strong>Monitor</strong>: maintains the status of the cluster (monitor map, manager map, OSD map, CRUSH map)</li>
-<li><strong>OSD</strong>: Object Storage Device, a daemon which interacts with client for providing data</li>
-<li><strong>MDS</strong>: Ceph Meta  Data Server, meta data service for CephFS</li>
-<li><strong>RGW</strong>: Rados Gateway, provide object storage service</li>
-<li><strong>RBD</strong>: Rados Block Device, block storage service</li>
-<li><strong>CRUSH</strong>:  algorithm for data distribution in Ceph</li>
-<li><strong>PG</strong>: Placement Groups, a logical concept for better data distribution and localization</li>
-</ul>
-<h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><h4 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a><a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/147650.html#title-s05-xk0-670">Cephadm</a></h4><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hukey/p/11899710.html">https://www.cnblogs.com/hukey/p/11899710.html</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
