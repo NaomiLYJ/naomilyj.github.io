@@ -2,15 +2,14 @@
 <search>
   <entry>
     <title>Ceph</title>
-    <url>/2021/09/12/ceph/</url>
+    <url>/2021/10/05/ceph/</url>
     <content><![CDATA[<h2 id="Ceph"><a href="#Ceph" class="headerlink" title="Ceph"></a>Ceph</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>Ceph is an open source storage system, which supports 3 types of sorage:</p>
 <ul>
 <li>block storage: support snapshot</li>
 <li>file system: posix interface, support snapshot</li>
 <li>object storage: s3 compatible</li>
 </ul>
-<h3 id="Core-components-and-concepts"><a href="#Core-components-and-concepts" class="headerlink" title="Core components and concepts"></a>Core components and concepts</h3><p><a href="Post-Asset-Folder/ceph-architecture.png">!ceph architecture</a></p>
-
+<h3 id="Core-components-and-concepts"><a href="#Core-components-and-concepts" class="headerlink" title="Core components and concepts"></a>Core components and concepts</h3><img src="/2021/10/05/ceph/ceph-architecture.png" class="" title="Ceph Architecture">
 
 <ul>
 <li><strong>Monitor</strong>: maintains the status of the cluster (monitor map, manager map, OSD map, CRUSH map)</li>
