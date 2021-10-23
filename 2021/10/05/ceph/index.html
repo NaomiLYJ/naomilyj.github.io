@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/2021/10/05/ceph/ceph-architecture.png">
 <meta property="og:image" content="http://example.com/2021/10/05/ceph/cephfs.png">
 <meta property="article:published_time" content="2021-10-05T15:29:45.000Z">
-<meta property="article:modified_time" content="2021-10-23T18:44:18.710Z">
+<meta property="article:modified_time" content="2021-10-23T18:46:04.914Z">
 <meta property="article:author" content="Yuanjing Liu">
 <meta property="article:tag" content="storage">
 <meta property="article:tag" content="cloud">
@@ -248,7 +248,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-10-23 18:44:18" itemprop="dateModified" datetime="2021-10-23T18:44:18+00:00">2021-10-23</time>
+        <time title="Modified: 2021-10-23 18:46:04" itemprop="dateModified" datetime="2021-10-23T18:46:04+00:00">2021-10-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -267,7 +267,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>3.2k</span>
+      <span>3.1k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -325,7 +325,7 @@
 <li><p>cephfs structure</p>
 <img src="/2021/10/05/ceph/cephfs.png" class="" title="CephFS"></li>
 <li><p>prepare cephfs server</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a fs, refer to cephadm</span></span><br><span class="line"><span class="comment"># create pool for data and metadata </span></span><br><span class="line">$ ceph osd pool create cephfs_data 64 64</span><br><span class="line">$ ceph osd pool create cephfs_metadata 64 64</span><br><span class="line"><span class="comment"># create a fs</span></span><br><span class="line">$ ceph fs new cephfs-demo1 cephfs_metadata cephfs_data</span><br><span class="line">$ ceph orch apply mds cephfs-demo1 --placement=<span class="string">&quot;3 iam02 openam01 opendj01&quot;</span></span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create pool for data and metadata </span></span><br><span class="line">$ ceph osd pool create cephfs_data 64 64</span><br><span class="line">$ ceph osd pool create cephfs_metadata 64 64</span><br><span class="line"><span class="comment"># create a fs</span></span><br><span class="line">$ ceph fs new cephfs-demo1 cephfs_metadata cephfs_data</span><br><span class="line">$ ceph orch apply mds cephfs-demo1 --placement=<span class="string">&quot;3 iam02 openam01 opendj01&quot;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>prepare cephfs dynamic provisioner and plugin </p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># refer to https://github.com/ceph/ceph-csi/tree/devel/deploy/cephfs/kubernetes</span></span><br><span class="line">$ kubectl apply -f ceph-block-provisioner/deploy/ -n ceph</span><br><span class="line"></span><br><span class="line"><span class="comment"># test cephfs pvc</span></span><br><span class="line">kubectl apply -f test_pvc.yaml</span><br><span class="line">kubectl apply -f test_pvc_pod.yaml</span><br><span class="line"></span><br><span class="line">ceph -m 10.0.2.4:6789 --id admin --key=AQCEKzthORrmJhAA3PH7m+9kldDLLRQXuscofg== -c /etc/ceph/ceph.conf fs ls --format=json</span><br></pre></td></tr></table></figure></li>
 </ul>
