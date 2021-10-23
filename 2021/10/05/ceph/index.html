@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/2021/10/05/ceph/ceph-architecture.png">
 <meta property="og:image" content="http://example.com/2021/10/05/ceph/cephfs.png">
 <meta property="article:published_time" content="2021-10-05T15:29:45.000Z">
-<meta property="article:modified_time" content="2021-10-23T18:48:38.678Z">
+<meta property="article:modified_time" content="2021-10-23T18:56:20.727Z">
 <meta property="article:author" content="Yuanjing Liu">
 <meta property="article:tag" content="storage">
 <meta property="article:tag" content="cloud">
@@ -152,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Core-components-and-concepts"><span class="nav-number">2.</span> <span class="nav-text">Core components and concepts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup"><span class="nav-number">3.</span> <span class="nav-text">Setup</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cephadm"><span class="nav-number">3.1.</span> <span class="nav-text">Cephadm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rook-ceph"><span class="nav-number">3.2.</span> <span class="nav-text">Rook-ceph</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">4.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CephRBD-use-ceph-in-k8s"><span class="nav-number">4.1.</span> <span class="nav-text">CephRBD (use ceph in k8s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CephFS-use-cephfs-in-k8s"><span class="nav-number">4.2.</span> <span class="nav-text">CephFS (use cephfs in k8s)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ceph-Tutorials"><span class="nav-number"></span> <span class="nav-text">Ceph Tutorials</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number"></span> <span class="nav-text">References</span></a></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Core-components-and-concepts"><span class="nav-number">2.</span> <span class="nav-text">Core components and concepts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setup"><span class="nav-number">3.</span> <span class="nav-text">Setup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cephadm"><span class="nav-number">3.1.</span> <span class="nav-text">Cephadm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rook-ceph"><span class="nav-number">3.2.</span> <span class="nav-text">Rook-ceph</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">4.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CephRBD-use-ceph-in-k8s"><span class="nav-number">4.1.</span> <span class="nav-text">CephRBD (use ceph in k8s)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CephFS-use-cephfs-in-k8s"><span class="nav-number">4.2.</span> <span class="nav-text">CephFS (use cephfs in k8s)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ceph-Object-Storage"><span class="nav-number">4.3.</span> <span class="nav-text">Ceph Object Storage</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ceph-Tutorials"><span class="nav-number">5.</span> <span class="nav-text">Ceph Tutorials</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -248,7 +248,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-10-23 18:48:38" itemprop="dateModified" datetime="2021-10-23T18:48:38+00:00">2021-10-23</time>
+        <time title="Modified: 2021-10-23 18:56:20" itemprop="dateModified" datetime="2021-10-23T18:56:20+00:00">2021-10-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -267,7 +267,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>3.1k</span>
+      <span>3.3k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -285,14 +285,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>Ceph is an open source storage system, which supports 3 types of sorage:</p>
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Ceph is an open source storage system, which supports 3 types of sorage:</p>
 <ul>
 <li>block storage: support snapshot</li>
 <li>file system: posix interface, support snapshot</li>
 <li>object storage: s3 compatible</li>
 </ul>
 <span id="more"></span>
-<h3 id="Core-components-and-concepts"><a href="#Core-components-and-concepts" class="headerlink" title="Core components and concepts"></a>Core components and concepts</h3><img src="/2021/10/05/ceph/ceph-architecture.png" class="" title="Ceph Architecture">
+<h2 id="Core-components-and-concepts"><a href="#Core-components-and-concepts" class="headerlink" title="Core components and concepts"></a>Core components and concepts</h2><img src="/2021/10/05/ceph/ceph-architecture.png" class="" title="Ceph Architecture">
 
 <ul>
 <li><strong>Monitor</strong>: maintains the status of the cluster (monitor map, manager map, OSD map, CRUSH map)</li>
@@ -303,9 +303,9 @@
 <li><strong>CRUSH</strong>:  algorithm for data distribution in Ceph</li>
 <li><strong>PG</strong>: Placement Groups, a logical concept for better data distribution and localization</li>
 </ul>
-<h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><h4 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a>Cephadm</h4><p>For setup with cephadm please go to <a target="_blank" rel="noopener" href="https://naomilyj.github.io/2021/10/05/cephadm/">here</a></p>
-<h4 id="Rook-ceph"><a href="#Rook-ceph" class="headerlink" title="Rook-ceph"></a>Rook-ceph</h4><p>For setup with rook please go to <a target="_blank" rel="noopener" href="https://naomilyj.github.io/2021/10/06/rook-ceph/">here</a></p>
-<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><h4 id="CephRBD-use-ceph-in-k8s"><a href="#CephRBD-use-ceph-in-k8s" class="headerlink" title="CephRBD (use ceph in k8s)"></a>CephRBD (use ceph in k8s)</h4><ul>
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><h3 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a>Cephadm</h3><p>For setup with cephadm please go to <a target="_blank" rel="noopener" href="https://naomilyj.github.io/2021/10/05/cephadm/">here</a></p>
+<h3 id="Rook-ceph"><a href="#Rook-ceph" class="headerlink" title="Rook-ceph"></a>Rook-ceph</h3><p>For setup with rook please go to <a target="_blank" rel="noopener" href="https://naomilyj.github.io/2021/10/06/rook-ceph/">here</a></p>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><h3 id="CephRBD-use-ceph-in-k8s"><a href="#CephRBD-use-ceph-in-k8s" class="headerlink" title="CephRBD (use ceph in k8s)"></a>CephRBD (use ceph in k8s)</h3><ul>
 <li><p>prepare ceph server</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a pool for block storage</span></span><br><span class="line">$ ceph osd pool create kubernetes</span><br><span class="line"><span class="comment"># create user</span></span><br><span class="line">$ ceph auth get-or-create client.kubernetes mon <span class="string">&#x27;profile rbd&#x27;</span> osd <span class="string">&#x27;profile rbd pool=kubernetes&#x27;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>prepare rbd dynamic provisioner and plugin</p>
@@ -321,17 +321,17 @@
 </ul>
 </li>
 </ul>
-<h4 id="CephFS-use-cephfs-in-k8s"><a href="#CephFS-use-cephfs-in-k8s" class="headerlink" title="CephFS (use cephfs in k8s)"></a>CephFS (use cephfs in k8s)</h4><ul>
+<h3 id="CephFS-use-cephfs-in-k8s"><a href="#CephFS-use-cephfs-in-k8s" class="headerlink" title="CephFS (use cephfs in k8s)"></a>CephFS (use cephfs in k8s)</h3><ul>
 <li><p>cephfs structure</p>
 <img src="/2021/10/05/ceph/cephfs.png" class="" title="CephFS"></li>
 <li><p>prepare cephfs server</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create pool for data and metadata </span></span><br><span class="line">$ ceph osd pool create cephfs_data 64 64</span><br><span class="line">$ ceph osd pool create cephfs_metadata 64 64</span><br><span class="line"><span class="comment"># create a fs</span></span><br><span class="line">$ ceph fs new cephfs-demo1 cephfs_metadata cephfs_data</span><br><span class="line">$ ceph orch apply mds cephfs-demo1 --placement=<span class="string">&quot;3 iam02 openam01 opendj01&quot;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>prepare cephfs dynamic provisioner and plugin </p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># refer to https://github.com/ceph/ceph-csi/tree/devel/deploy/cephfs/kubernetes</span></span><br><span class="line">$ kubectl apply -f ceph-block-provisioner/deploy/ -n ceph</span><br><span class="line"></span><br><span class="line"><span class="comment"># test cephfs pvc</span></span><br><span class="line">kubectl apply -f test_pvc.yaml</span><br><span class="line">kubectl apply -f test_pvc_pod.yaml</span><br><span class="line"></span><br><span class="line">ceph -m 10.0.2.4:6789 --id admin --key=AQCEKzthORrmJhAA3PH7m+9kldDLLRQXuscofg== -c /etc/ceph/ceph.conf fs ls --format=json</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Ceph-Tutorials"><a href="#Ceph-Tutorials" class="headerlink" title="Ceph Tutorials"></a>Ceph Tutorials</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  pool</span></span><br><span class="line">$ ceph osd pool ls detail</span><br><span class="line">$ ceph config <span class="built_in">set</span> mon mon_allow_pool_delete <span class="literal">true</span></span><br><span class="line">$ ceph osd pool rm testpg testpg --yes-i-really-really-mean-it</span><br></pre></td></tr></table></figure>
-<ul>
-<li>cheat sheet of ceph command<br>  <a target="_blank" rel="noopener" href="https://sabaini.at/pages/ceph-cheatsheet.html">https://sabaini.at/pages/ceph-cheatsheet.html</a></li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># refer to https://github.com/ceph/ceph-csi/tree/devel/deploy/cephfs/kubernetes</span></span><br><span class="line">$ kubectl apply -f ceph-block-provisioner/deploy/ -n ceph</span><br><span class="line"></span><br><span class="line"><span class="comment"># test cephfs pvc</span></span><br><span class="line">kubectl apply -f test_pvc.yaml</span><br><span class="line">kubectl apply -f test_pvc_pod.yaml</span><br><span class="line"></span><br><span class="line">ceph -m 10.0.2.4:6789 --id admin --key=AQCEKzthORrmJhAA3PH7m+9kldDLLRQXuscofg== -c /etc/ceph/ceph.conf fs ls --format=json</span><br></pre></td></tr></table></figure>
+<h3 id="Ceph-Object-Storage"><a href="#Ceph-Object-Storage" class="headerlink" title="Ceph Object Storage"></a>Ceph Object Storage</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install s3cmd</span></span><br><span class="line">$ apt-get install s3cmd</span><br><span class="line"><span class="comment"># configure with key and secret, dns-style:  rgw-ip:port/%(bucket)s</span></span><br><span class="line">$ s3cmd --configure</span><br><span class="line"><span class="comment"># create bucket</span></span><br><span class="line">$ s3cmd mb s3://demo-bucket</span><br></pre></td></tr></table></figure>
+<h2 id="Ceph-Tutorials"><a href="#Ceph-Tutorials" class="headerlink" title="Ceph Tutorials"></a>Ceph Tutorials</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  pool</span></span><br><span class="line">$ ceph osd pool ls detail</span><br><span class="line">$ ceph config <span class="built_in">set</span> mon mon_allow_pool_delete <span class="literal">true</span></span><br><span class="line">$ ceph osd pool rm testpg testpg --yes-i-really-really-mean-it</span><br></pre></td></tr></table></figure></li>
+<li><p>cheat sheet of ceph command<br>  <a target="_blank" rel="noopener" href="https://sabaini.at/pages/ceph-cheatsheet.html">https://sabaini.at/pages/ceph-cheatsheet.html</a></p>
+</li>
 </ul>
 <p><strong>Note</strong>:<br>Ceph RBD and CephFS both supports filesystem</p>
 <ul>
