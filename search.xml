@@ -40,6 +40,8 @@
 </li>
 </ul>
 <h4 id="CephFS-use-cephfs-in-k8s"><a href="#CephFS-use-cephfs-in-k8s" class="headerlink" title="CephFS (use cephfs in k8s)"></a>CephFS (use cephfs in k8s)</h4><ul>
+<li><p>cephfs structure</p>
+<img src="/2021/10/05/ceph/cephfs.png" class="" title="CephFS"></li>
 <li><p>prepare cephfs server</p>
   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a fs, refer to cephadm</span></span><br><span class="line"><span class="comment"># create pool for data and metadata </span></span><br><span class="line">$ ceph osd pool create cephfs_data 64 64</span><br><span class="line">$ ceph osd pool create cephfs_metadata 64 64</span><br><span class="line"><span class="comment"># create a fs</span></span><br><span class="line">$ ceph fs new cephfs-demo1 cephfs_metadata cephfs_data</span><br><span class="line">$ ceph orch apply mds cephfs-demo1 --placement=<span class="string">&quot;3 iam02 openam01 opendj01&quot;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>prepare cephfs dynamic provisioner and plugin </p>
