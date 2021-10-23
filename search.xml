@@ -21,7 +21,9 @@
 <li><strong>CRUSH</strong>:  algorithm for data distribution in Ceph</li>
 <li><strong>PG</strong>: Placement Groups, a logical concept for better data distribution and localization</li>
 </ul>
-<h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><h4 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a><a href="https://naomilyj.github.io/2021/10/05/cephadm/">Cephadm</a></h4><h4 id="Rook-ceph"><a href="#Rook-ceph" class="headerlink" title="Rook-ceph"></a><a href="https://naomilyj.github.io/2021/10/06/rook-ceph/">Rook-ceph</a></h4><h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><h4 id="CephRBD-use-ceph-in-k8s"><a href="#CephRBD-use-ceph-in-k8s" class="headerlink" title="CephRBD (use ceph in k8s)"></a>CephRBD (use ceph in k8s)</h4><ul>
+<h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><h4 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a>Cephadm</h4><p>For setup with cephadm please go to <a href="https://naomilyj.github.io/2021/10/05/cephadm/">here</a></p>
+<h4 id="Rook-ceph"><a href="#Rook-ceph" class="headerlink" title="Rook-ceph"></a>Rook-ceph</h4><p>For setup with rook please go to <a href="https://naomilyj.github.io/2021/10/06/rook-ceph/">here</a></p>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><h4 id="CephRBD-use-ceph-in-k8s"><a href="#CephRBD-use-ceph-in-k8s" class="headerlink" title="CephRBD (use ceph in k8s)"></a>CephRBD (use ceph in k8s)</h4><ul>
 <li><p>prepare ceph server</p>
   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a pool for block storage</span></span><br><span class="line">$ ceph osd pool create kubernetes</span><br><span class="line"><span class="comment"># create user</span></span><br><span class="line">$ ceph auth get-or-create client.kubernetes mon <span class="string">&#x27;profile rbd&#x27;</span> osd <span class="string">&#x27;profile rbd pool=kubernetes&#x27;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>prepare rbd dynamic provisioner and plugin</p>
