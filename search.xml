@@ -36,7 +36,7 @@
   </entry>
   <entry>
     <title>Install ceph with cephadm</title>
-    <url>/2021/10/05/cephadm/cephadm/</url>
+    <url>/2021/10/05/cephadm/</url>
     <content><![CDATA[<h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><p>10.0.2.7 iam02 /dev/sda mon<br>10.0.2.4 openam01 /dev/sdc mon<br>10.0.2.5 opendj01 /dev/sdb mon</p>
 <span id="more"></span>
 <h2 id="Prepare-Environment"><a href="#Prepare-Environment" class="headerlink" title="Prepare Environment"></a>Prepare Environment</h2><ul>
@@ -66,6 +66,45 @@
         <tag>cloud</tag>
         <tag>ceph</tag>
         <tag>cephadm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Install ceph with rook in k8s</title>
+    <url>/2021/10/06/rook-ceph/</url>
+    <content><![CDATA[<h2 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h2><p>For installing ceph in k8s with rook, follwing requirements should be fulfilled</p>
+<ul>
+<li>kubernetes &gt; v1.17.0</li>
+<li>minimum 3 nodes of kubernetes cluster</li>
+<li>disk  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. The device must have no partitions.</span><br><span class="line">2. The device must not have any LVM state.</span><br><span class="line">3. The device must not be mounted.</span><br><span class="line">4. The device must not contain a file system.</span><br><span class="line">5. The device must not contain a Ceph BlueStore OSD.</span><br><span class="line">6. The device must be larger than 5 GB.</span><br><span class="line"><span class="comment"># check with lsblk</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Install-Rook-Operator"><a href="#Install-Rook-Operator" class="headerlink" title="Install Rook Operator"></a>Install Rook Operator</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># download rook release 1.3</span></span><br><span class="line">$ git <span class="built_in">clone</span> --single-branch --branch release-1.3 https://github.com/rook/rook.git</span><br><span class="line"><span class="comment"># configuration files</span></span><br><span class="line">$ <span class="built_in">cd</span> rook/cluster/examples/kubernetes/ceph</span><br><span class="line"></span><br><span class="line">$ kubectl create -f common.yaml</span><br><span class="line">$ kubectl apply -f operator.yaml</span><br><span class="line"><span class="comment">#Output</span></span><br><span class="line">$ configmap/rook-ceph-operator-config created</span><br><span class="line">$ deployment.apps/rook-ceph-operator created</span><br><span class="line"></span><br><span class="line"><span class="comment">#check pods created in rook-ceph</span></span><br><span class="line">$ kubectl get pod -n rook-ceph</span><br><span class="line"><span class="comment">#Output</span></span><br><span class="line">NAME                                  READY   STATUS    RESTARTS   AGE</span><br><span class="line">rook-ceph-operator-599765ff49-fhbz9   1/1     Running   0          92s</span><br><span class="line">rook-discover-6fhlb                   1/1     Running   0          55s</span><br><span class="line">rook-discover-97kmz                   1/1     Running   0          55s</span><br><span class="line">rook-discover-z5k2z                   1/1     Running   0          55s</span><br></pre></td></tr></table></figure>
+
+<h2 id="Create-a-ceph-cluster"><a href="#Create-a-ceph-cluster" class="headerlink" title="Create a ceph cluster"></a>Create a ceph cluster</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># label your node for ceph setup</span></span><br><span class="line">[root@k8smaster01 ceph]<span class="comment"># kubectl taint node k8smaster01 node-role.kubernetes.io/master=&quot;&quot;:NoSchedule</span></span><br><span class="line"></span><br><span class="line">[root@k8smaster01 ceph]<span class="comment"># kubectl taint node k8smaster02 node-role.kubernetes.io/master=&quot;&quot;:NoSchedule</span></span><br><span class="line"></span><br><span class="line">[root@k8smaster01 ceph]<span class="comment"># kubectl taint node k8smaster03 node-role.kubernetes.io/master=&quot;&quot;:NoSchedule</span></span><br><span class="line"></span><br><span class="line">[root@k8smaster01 ceph]<span class="comment"># kubectl label nodes &#123;192.168.10.127,192.168.10.128,192.168.10.129&#125; ceph-osd=enabled</span></span><br><span class="line"></span><br><span class="line">[root@k8smaster01 ceph]<span class="comment"># kubectl label nodes &#123;192.168.10.127,192.168.10.128,192.168.10.129&#125; ceph-mon=enabled</span></span><br><span class="line"></span><br><span class="line">[root@k8smaster01 ceph]<span class="comment"># kubectl label nodes 192.168.10.127 ceph-mgr=enabled</span></span><br><span class="line"></span><br><span class="line">**提示：当前版本rook中mgr只能支持一个节点运行。**</span><br><span class="line"></span><br><span class="line">[root@k8smaster01 ~]<span class="comment"># cd /root/rook/cluster/examples/kubernetes/ceph/</span></span><br><span class="line"></span><br><span class="line">[root@k8smaster01 ceph]<span class="comment"># kubectl create -f common.yaml</span></span><br><span class="line"></span><br><span class="line">[root@k8smaster01 ceph]<span class="comment"># kubectl create -f operator.yaml</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">kubectl apply -f cephcluster.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># Output</span></span><br><span class="line">NAME                                                   READY   STATUS    RESTARTS   AGE</span><br><span class="line">csi-cephfsplugin-lz6dn                                 3/3     Running   0          3m54s</span><br><span class="line">csi-cephfsplugin-provisioner-674847b584-4j9jw          5/5     Running   0          3m54s</span><br><span class="line">csi-cephfsplugin-provisioner-674847b584-h2cgl          5/5     Running   0          3m54s</span><br><span class="line">csi-cephfsplugin-qbpnq                                 3/3     Running   0          3m54s</span><br><span class="line">csi-cephfsplugin-qzsvr                                 3/3     Running   0          3m54s</span><br><span class="line">csi-rbdplugin-kk9sw                                    3/3     Running   0          3m55s</span><br><span class="line">csi-rbdplugin-l95f8                                    3/3     Running   0          3m55s</span><br><span class="line">csi-rbdplugin-provisioner-64ccb796cf-8gjwv             6/6     Running   0          3m55s</span><br><span class="line">csi-rbdplugin-provisioner-64ccb796cf-dhpwt             6/6     Running   0          3m55s</span><br><span class="line">csi-rbdplugin-v4hk6                                    3/3     Running   0          3m55s</span><br><span class="line">rook-ceph-crashcollector-pool-33zy7-68cdfb6bcf-9cfkn   1/1     Running   0          109s</span><br><span class="line">rook-ceph-crashcollector-pool-33zyc-565559f7-7r6rt     1/1     Running   0          53s</span><br><span class="line">rook-ceph-crashcollector-pool-33zym-749dcdc9df-w4xzl   1/1     Running   0          78s</span><br><span class="line">rook-ceph-mgr-a-7fdf77cf8d-ppkwl                       1/1     Running   0          53s</span><br><span class="line">rook-ceph-mon-a-97d9767c6-5ftfm                        1/1     Running   0          109s</span><br><span class="line">rook-ceph-mon-b-9cb7bdb54-lhfkj                        1/1     Running   0          96s</span><br><span class="line">rook-ceph-mon-c-786b9f7f4b-jdls4                       1/1     Running   0          78s</span><br><span class="line">rook-ceph-operator-599765ff49-fhbz9                    1/1     Running   0          6m58s</span><br><span class="line">rook-ceph-osd-prepare-pool-33zy7-c2hww                 1/1     Running   0          21s</span><br><span class="line">rook-ceph-osd-prepare-pool-33zyc-szwsc                 1/1     Running   0          21s</span><br><span class="line">rook-ceph-osd-prepare-pool-33zym-2p68b                 1/1     Running   0          21s</span><br><span class="line">rook-discover-6fhlb                                    1/1     Running   0          6m21s</span><br><span class="line">rook-discover-97kmz                                    1/1     Running   0          6m21s</span><br><span class="line">rook-discover-z5k2z                                    1/1     Running   0          6m21s</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Create-a-block-storageclass"><a href="#Create-a-block-storageclass" class="headerlink" title="Create a block storageclass"></a>Create a block storageclass</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f ./csi/rbd/storageclass.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># Output</span></span><br><span class="line">cephblockpool.ceph.rook.io/replicapool created</span><br><span class="line">storageclass.storage.k8s.io/rook-ceph-block created</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h4><ol>
+<li><p><a href="https://kuboard.cn/learning/k8s-intermediate/persistent/ceph/rook-config.html#%E5%AE%89%E8%A3%85-rook-ceph">https://kuboard.cn/learning/k8s-intermediate/persistent/ceph/rook-config.html#%E5%AE%89%E8%A3%85-rook-ceph</a></p>
+</li>
+<li><p><a href="https://www.joyk.com/dig/detail/1585287051590150">https://www.joyk.com/dig/detail/1585287051590150</a></p>
+</li>
+<li><p><a href="https://www.qikqiak.com/post/deploy-ceph-cluster-with-rook/">https://www.qikqiak.com/post/deploy-ceph-cluster-with-rook/</a></p>
+</li>
+<li><p><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ceph-cluster-within-kubernetes-using-rook">https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ceph-cluster-within-kubernetes-using-rook</a></p>
+</li>
+<li><p><a href="https://xiebiao.top/post/storage/rook_install_operator/">https://xiebiao.top/post/storage/rook_install_operator/</a></p>
+</li>
+<li><p><a href="https://github.com/rook/rook/tree/master/cluster/examples">https://github.com/rook/rook/tree/master/cluster/examples</a></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>storage</category>
+      </categories>
+      <tags>
+        <tag>cloud</tag>
+        <tag>ceph</tag>
+        <tag>rook-ceph</tag>
       </tags>
   </entry>
 </search>
