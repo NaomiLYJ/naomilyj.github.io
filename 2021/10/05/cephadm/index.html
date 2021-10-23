@@ -29,7 +29,7 @@
 <meta property="og:description" content="Layout10.0.2.7 iam02 &#x2F;dev&#x2F;sda mon10.0.2.4 openam01 &#x2F;dev&#x2F;sdc mon10.0.2.5 opendj01 &#x2F;dev&#x2F;sdb mon">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-05T15:56:43.000Z">
-<meta property="article:modified_time" content="2021-10-23T17:06:06.381Z">
+<meta property="article:modified_time" content="2021-10-23T17:11:31.607Z">
 <meta property="article:author" content="Yuanjing Liu">
 <meta property="article:tag" content="cloud">
 <meta property="article:tag" content="ceph">
@@ -149,7 +149,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Layout"><span class="nav-number">1.</span> <span class="nav-text">Layout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prepare-Environment"><span class="nav-number">2.</span> <span class="nav-text">Prepare Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">3.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Initialization"><span class="nav-number">3.1.</span> <span class="nav-text">Initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Access-cluster"><span class="nav-number">3.2.</span> <span class="nav-text">Access cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-other-nodes-to-cluster"><span class="nav-number">3.3.</span> <span class="nav-text">Add other nodes to cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-osd"><span class="nav-number">3.4.</span> <span class="nav-text">Deploy osd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-mds"><span class="nav-number">3.5.</span> <span class="nav-text">Deploy mds</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ceph-CLI"><span class="nav-number">4.</span> <span class="nav-text">Ceph CLI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Layout"><span class="nav-number">1.</span> <span class="nav-text">Layout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prepare-Environment"><span class="nav-number">2.</span> <span class="nav-text">Prepare Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">3.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Initialization"><span class="nav-number">3.1.</span> <span class="nav-text">Initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Access-cluster"><span class="nav-number">3.2.</span> <span class="nav-text">Access cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-other-nodes-to-cluster"><span class="nav-number">3.3.</span> <span class="nav-text">Add other nodes to cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-osd"><span class="nav-number">3.4.</span> <span class="nav-text">Deploy osd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-mds"><span class="nav-number">3.5.</span> <span class="nav-text">Deploy mds</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ceph-CLI"><span class="nav-number">4.</span> <span class="nav-text">Ceph CLI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ceph-as-persistent-storage-for-k8s"><span class="nav-number">5.</span> <span class="nav-text">Ceph as persistent storage for k8s</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-CephFS"><span class="nav-number">5.1.</span> <span class="nav-text">Use CephFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-Ceph-RBD"><span class="nav-number">5.2.</span> <span class="nav-text">Use Ceph RBD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -245,7 +245,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-10-23 17:06:06" itemprop="dateModified" datetime="2021-10-23T17:06:06+00:00">2021-10-23</time>
+        <time title="Modified: 2021-10-23 17:11:31" itemprop="dateModified" datetime="2021-10-23T17:11:31+00:00">2021-10-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -264,7 +264,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>2.1k</span>
+      <span>2.2k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -299,8 +299,7 @@
 
 <h2 id="Ceph-CLI"><a href="#Ceph-CLI" class="headerlink" title="Ceph CLI"></a>Ceph CLI</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install ceph-common on client nodes</span></span><br><span class="line">$ cephadm add repo --release &#123;pacific&#125;</span><br><span class="line">$ cephadm install ceph-common</span><br><span class="line"><span class="comment"># on client nodes, we could use ceph command</span></span><br><span class="line">$ ceph -s</span><br><span class="line">$ ceph orch host ls</span><br></pre></td></tr></table></figure>
 
-
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<h2 id="Ceph-as-persistent-storage-for-k8s"><a href="#Ceph-as-persistent-storage-for-k8s" class="headerlink" title="Ceph as persistent storage for k8s"></a>Ceph as persistent storage for k8s</h2><h3 id="Use-CephFS"><a href="#Use-CephFS" class="headerlink" title="Use CephFS"></a>Use CephFS</h3><h3 id="Use-Ceph-RBD"><a href="#Use-Ceph-RBD" class="headerlink" title="Use Ceph RBD"></a>Use Ceph RBD</h3><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zjz20/p/14136349.html">https://www.cnblogs.com/zjz20/p/14136349.html</a></li>
 </ol>
 
@@ -361,14 +360,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">6k</span>
+    <span title="Symbols count total">9k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">6 mins.</span>
+    <span title="Reading time total">8 mins.</span>
   </span>
 </div>
 

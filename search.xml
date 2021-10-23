@@ -21,8 +21,42 @@
 <li><strong>CRUSH</strong>:  algorithm for data distribution in Ceph</li>
 <li><strong>PG</strong>: Placement Groups, a logical concept for better data distribution and localization</li>
 </ul>
-<h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><h4 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a><a href="https://help.aliyun.com/document_detail/147650.html#title-s05-xk0-670">Cephadm</a></h4><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><h4 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a><a href="https://help.aliyun.com/document_detail/147650.html#title-s05-xk0-670">Cephadm</a></h4><h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><h4 id="CephRBD-use-ceph-in-k8s"><a href="#CephRBD-use-ceph-in-k8s" class="headerlink" title="CephRBD (use ceph in k8s)"></a>CephRBD (use ceph in k8s)</h4><ul>
+<li><p>prepare ceph server</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a pool for block storage</span></span><br><span class="line">$ ceph osd pool create kubernetes</span><br><span class="line"><span class="comment"># create user</span></span><br><span class="line">$ ceph auth get-or-create client.kubernetes mon <span class="string">&#x27;profile rbd&#x27;</span> osd <span class="string">&#x27;profile rbd pool=kubernetes&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>prepare rbd dynamic provisioner and plugin</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># refer to https://github.com/ceph/ceph-csi/tree/devel/deploy/rbd/kubernetes</span></span><br><span class="line">$ kubectl apply -f ceph-block-provisioner/deploy/ -n ceph</span><br></pre></td></tr></table></figure></li>
+<li><p>test dynamic provisioning of rbd of block mode</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl apply -f test-raw-block-pvc.yaml</span><br><span class="line">$ kubectl apply -f test-raw-block-pod.yaml</span><br></pre></td></tr></table></figure></li>
+<li><p>test dynamic provisioning of rbd of filesystem mode</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl apply -f test-filesystem-pvc.yaml</span><br><span class="line">$ kubectl apply -f test-filesystem-pod.yaml</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Note</strong>: </p>
+<ul>
+<li>ERROR: MountVolume.SetUp failed for volume “registration-dir” : hostPath type check failed: /var/lib/kubelet/plugins_registry/ is not a directory.<br><strong>change kubelet dir to <code>/data/kubelet</code></strong></li>
+<li>rbd-plugin is a daemonset, add tolerations to deploy to all nodes  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">tolerations:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">key:</span> <span class="string">&quot;master&quot;</span></span><br><span class="line">    <span class="attr">value:</span> <span class="string">&quot;prometheus&quot;</span></span><br><span class="line">    <span class="attr">effect:</span> <span class="string">&quot;NoSchedule&quot;</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">key:</span> <span class="string">&quot;master&quot;</span></span><br><span class="line">    <span class="attr">value:</span> <span class="string">&quot;nowork&quot;</span></span><br><span class="line">    <span class="attr">effect:</span> <span class="string">&quot;NoSchedule&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="CephFS-use-cephfs-in-k8s"><a href="#CephFS-use-cephfs-in-k8s" class="headerlink" title="CephFS (use cephfs in k8s)"></a>CephFS (use cephfs in k8s)</h4><ul>
+<li><p>prepare cephfs server</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a fs, refer to cephadm</span></span><br><span class="line"><span class="comment"># create pool for data and metadata </span></span><br><span class="line">$ ceph osd pool create cephfs_data 64 64</span><br><span class="line">$ ceph osd pool create cephfs_metadata 64 64</span><br><span class="line"><span class="comment"># create a fs</span></span><br><span class="line">$ ceph fs new cephfs-demo1 cephfs_metadata cephfs_data</span><br><span class="line">$ ceph orch apply mds cephfs-demo1 --placement=<span class="string">&quot;3 iam02 openam01 opendj01&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>prepare cephfs dynamic provisioner and plugin </p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># refer to https://github.com/ceph/ceph-csi/tree/devel/deploy/cephfs/kubernetes</span></span><br><span class="line">$ kubectl apply -f ceph-block-provisioner/deploy/ -n ceph</span><br><span class="line"></span><br><span class="line"><span class="comment"># test cephfs pvc</span></span><br><span class="line">kubectl apply -f test_pvc.yaml</span><br><span class="line">kubectl apply -f test_pvc_pod.yaml</span><br><span class="line"></span><br><span class="line">ceph -m 10.0.2.4:6789 --id admin --key=AQCEKzthORrmJhAA3PH7m+9kldDLLRQXuscofg== -c /etc/ceph/ceph.conf fs ls --format=json</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="Ceph-Object-Storage"><a href="#Ceph-Object-Storage" class="headerlink" title="Ceph Object Storage"></a>Ceph Object Storage</h4><h3 id="Ceph-Tutorials"><a href="#Ceph-Tutorials" class="headerlink" title="Ceph Tutorials"></a>Ceph Tutorials</h3><ul>
+<li>cheat sheet of ceph command<br>  <a href="https://sabaini.at/pages/ceph-cheatsheet.html">https://sabaini.at/pages/ceph-cheatsheet.html</a></li>
+</ul>
+<p><strong>Note</strong>:<br>Ceph RBD and CephFS both supports filesystem</p>
+<ul>
+<li>ceph rbd: supports the volume shared by pods running on the same node, low latency, good I/O</li>
+<li>cephfs: supports the volume shared by pods running across multiple nodes, higher latency, good I/O, expecially for large files, but bottleneck with more storage</li>
+</ul>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li><a href="https://www.cnblogs.com/hukey/p/11899710.html">https://www.cnblogs.com/hukey/p/11899710.html</a></li>
+<li><a href="https://dylanyang.top/post/2021/05/15/k8s%E4%BD%BF%E7%94%A8ceph-csi%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8cephfs/">https://dylanyang.top/post/2021/05/15/k8s%E4%BD%BF%E7%94%A8ceph-csi%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8cephfs/</a></li>
+<li><a href="https://blog.51cto.com/leejia/2583381">https://blog.51cto.com/leejia/2583381</a></li>
+<li><a href="https://docs.ceph.com/en/octopus/rbd/rbd-kubernetes/">https://docs.ceph.com/en/octopus/rbd/rbd-kubernetes/</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">https://kubernetes.io/docs/concepts/storage/persistent-volumes/</a></li>
 </ol>
 ]]></content>
       <categories>
@@ -54,8 +88,7 @@
 
 <h2 id="Ceph-CLI"><a href="#Ceph-CLI" class="headerlink" title="Ceph CLI"></a>Ceph CLI</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># install ceph-common on client nodes</span></span><br><span class="line">$ cephadm add repo --release &#123;pacific&#125;</span><br><span class="line">$ cephadm install ceph-common</span><br><span class="line"><span class="comment"># on client nodes, we could use ceph command</span></span><br><span class="line">$ ceph -s</span><br><span class="line">$ ceph orch host ls</span><br></pre></td></tr></table></figure>
 
-
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<h2 id="Ceph-as-persistent-storage-for-k8s"><a href="#Ceph-as-persistent-storage-for-k8s" class="headerlink" title="Ceph as persistent storage for k8s"></a>Ceph as persistent storage for k8s</h2><h3 id="Use-CephFS"><a href="#Use-CephFS" class="headerlink" title="Use CephFS"></a>Use CephFS</h3><h3 id="Use-Ceph-RBD"><a href="#Use-Ceph-RBD" class="headerlink" title="Use Ceph RBD"></a>Use Ceph RBD</h3><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li><a href="https://www.cnblogs.com/zjz20/p/14136349.html">https://www.cnblogs.com/zjz20/p/14136349.html</a></li>
 </ol>
 ]]></content>

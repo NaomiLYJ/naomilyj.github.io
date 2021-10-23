@@ -30,7 +30,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/10/05/ceph/ceph-architecture.png">
 <meta property="article:published_time" content="2021-10-05T15:29:45.000Z">
-<meta property="article:modified_time" content="2021-10-23T17:01:45.479Z">
+<meta property="article:modified_time" content="2021-10-23T17:20:02.967Z">
 <meta property="article:author" content="Yuanjing Liu">
 <meta property="article:tag" content="storage">
 <meta property="article:tag" content="cloud">
@@ -151,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Core-components-and-concepts"><span class="nav-number">2.</span> <span class="nav-text">Core components and concepts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup"><span class="nav-number">3.</span> <span class="nav-text">Setup</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cephadm"><span class="nav-number">3.1.</span> <span class="nav-text">Cephadm</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number"></span> <span class="nav-text">References</span></a></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Core-components-and-concepts"><span class="nav-number">2.</span> <span class="nav-text">Core components and concepts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup"><span class="nav-number">3.</span> <span class="nav-text">Setup</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cephadm"><span class="nav-number">3.1.</span> <span class="nav-text">Cephadm</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">4.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CephRBD-use-ceph-in-k8s"><span class="nav-number">4.1.</span> <span class="nav-text">CephRBD (use ceph in k8s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CephFS-use-cephfs-in-k8s"><span class="nav-number">4.2.</span> <span class="nav-text">CephFS (use cephfs in k8s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ceph-Object-Storage"><span class="nav-number">4.3.</span> <span class="nav-text">Ceph Object Storage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ceph-Tutorials"><span class="nav-number">5.</span> <span class="nav-text">Ceph Tutorials</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number"></span> <span class="nav-text">References</span></a></div>
         </div>
         <!--/noindex-->
 
@@ -247,7 +247,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-10-23 17:01:45" itemprop="dateModified" datetime="2021-10-23T17:01:45+00:00">2021-10-23</time>
+        <time title="Modified: 2021-10-23 17:20:02" itemprop="dateModified" datetime="2021-10-23T17:20:02+00:00">2021-10-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -266,14 +266,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>652</span>
+      <span>3k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
+      <span>3 mins.</span>
     </span>
 </div>
 
@@ -302,8 +302,42 @@
 <li><strong>CRUSH</strong>:  algorithm for data distribution in Ceph</li>
 <li><strong>PG</strong>: Placement Groups, a logical concept for better data distribution and localization</li>
 </ul>
-<h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><h4 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a><a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/147650.html#title-s05-xk0-670">Cephadm</a></h4><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><h4 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a><a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/147650.html#title-s05-xk0-670">Cephadm</a></h4><h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><h4 id="CephRBD-use-ceph-in-k8s"><a href="#CephRBD-use-ceph-in-k8s" class="headerlink" title="CephRBD (use ceph in k8s)"></a>CephRBD (use ceph in k8s)</h4><ul>
+<li><p>prepare ceph server</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a pool for block storage</span></span><br><span class="line">$ ceph osd pool create kubernetes</span><br><span class="line"><span class="comment"># create user</span></span><br><span class="line">$ ceph auth get-or-create client.kubernetes mon <span class="string">&#x27;profile rbd&#x27;</span> osd <span class="string">&#x27;profile rbd pool=kubernetes&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>prepare rbd dynamic provisioner and plugin</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># refer to https://github.com/ceph/ceph-csi/tree/devel/deploy/rbd/kubernetes</span></span><br><span class="line">$ kubectl apply -f ceph-block-provisioner/deploy/ -n ceph</span><br></pre></td></tr></table></figure></li>
+<li><p>test dynamic provisioning of rbd of block mode</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f test-raw-block-pvc.yaml</span><br><span class="line">$ kubectl apply -f test-raw-block-pod.yaml</span><br></pre></td></tr></table></figure></li>
+<li><p>test dynamic provisioning of rbd of filesystem mode</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f test-filesystem-pvc.yaml</span><br><span class="line">$ kubectl apply -f test-filesystem-pod.yaml</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Note</strong>: </p>
+<ul>
+<li>ERROR: MountVolume.SetUp failed for volume “registration-dir” : hostPath type check failed: /var/lib/kubelet/plugins_registry/ is not a directory.<br><strong>change kubelet dir to <code>/data/kubelet</code></strong></li>
+<li>rbd-plugin is a daemonset, add tolerations to deploy to all nodes  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tolerations:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">key:</span> <span class="string">&quot;master&quot;</span></span><br><span class="line">    <span class="attr">value:</span> <span class="string">&quot;prometheus&quot;</span></span><br><span class="line">    <span class="attr">effect:</span> <span class="string">&quot;NoSchedule&quot;</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">key:</span> <span class="string">&quot;master&quot;</span></span><br><span class="line">    <span class="attr">value:</span> <span class="string">&quot;nowork&quot;</span></span><br><span class="line">    <span class="attr">effect:</span> <span class="string">&quot;NoSchedule&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="CephFS-use-cephfs-in-k8s"><a href="#CephFS-use-cephfs-in-k8s" class="headerlink" title="CephFS (use cephfs in k8s)"></a>CephFS (use cephfs in k8s)</h4><ul>
+<li><p>prepare cephfs server</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a fs, refer to cephadm</span></span><br><span class="line"><span class="comment"># create pool for data and metadata </span></span><br><span class="line">$ ceph osd pool create cephfs_data 64 64</span><br><span class="line">$ ceph osd pool create cephfs_metadata 64 64</span><br><span class="line"><span class="comment"># create a fs</span></span><br><span class="line">$ ceph fs new cephfs-demo1 cephfs_metadata cephfs_data</span><br><span class="line">$ ceph orch apply mds cephfs-demo1 --placement=<span class="string">&quot;3 iam02 openam01 opendj01&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>prepare cephfs dynamic provisioner and plugin </p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># refer to https://github.com/ceph/ceph-csi/tree/devel/deploy/cephfs/kubernetes</span></span><br><span class="line">$ kubectl apply -f ceph-block-provisioner/deploy/ -n ceph</span><br><span class="line"></span><br><span class="line"><span class="comment"># test cephfs pvc</span></span><br><span class="line">kubectl apply -f test_pvc.yaml</span><br><span class="line">kubectl apply -f test_pvc_pod.yaml</span><br><span class="line"></span><br><span class="line">ceph -m 10.0.2.4:6789 --id admin --key=AQCEKzthORrmJhAA3PH7m+9kldDLLRQXuscofg== -c /etc/ceph/ceph.conf fs ls --format=json</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="Ceph-Object-Storage"><a href="#Ceph-Object-Storage" class="headerlink" title="Ceph Object Storage"></a>Ceph Object Storage</h4><h3 id="Ceph-Tutorials"><a href="#Ceph-Tutorials" class="headerlink" title="Ceph Tutorials"></a>Ceph Tutorials</h3><ul>
+<li>cheat sheet of ceph command<br>  <a target="_blank" rel="noopener" href="https://sabaini.at/pages/ceph-cheatsheet.html">https://sabaini.at/pages/ceph-cheatsheet.html</a></li>
+</ul>
+<p><strong>Note</strong>:<br>Ceph RBD and CephFS both supports filesystem</p>
+<ul>
+<li>ceph rbd: supports the volume shared by pods running on the same node, low latency, good I/O</li>
+<li>cephfs: supports the volume shared by pods running across multiple nodes, higher latency, good I/O, expecially for large files, but bottleneck with more storage</li>
+</ul>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hukey/p/11899710.html">https://www.cnblogs.com/hukey/p/11899710.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://dylanyang.top/post/2021/05/15/k8s%E4%BD%BF%E7%94%A8ceph-csi%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8cephfs/">https://dylanyang.top/post/2021/05/15/k8s%E4%BD%BF%E7%94%A8ceph-csi%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8cephfs/</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/leejia/2583381">https://blog.51cto.com/leejia/2583381</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.ceph.com/en/octopus/rbd/rbd-kubernetes/">https://docs.ceph.com/en/octopus/rbd/rbd-kubernetes/</a></li>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">https://kubernetes.io/docs/concepts/storage/persistent-volumes/</a></li>
 </ol>
 
     </div>
@@ -360,14 +394,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">6k</span>
+    <span title="Symbols count total">9k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">6 mins.</span>
+    <span title="Reading time total">8 mins.</span>
   </span>
 </div>
 
