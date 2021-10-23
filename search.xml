@@ -125,7 +125,7 @@
 <h2 id="Create-a-block-storageclass"><a href="#Create-a-block-storageclass" class="headerlink" title="Create a block storageclass"></a>Create a block storageclass</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f ./csi/rbd/storageclass.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># Output</span></span><br><span class="line">cephblockpool.ceph.rook.io/replicapool created</span><br><span class="line">storageclass.storage.k8s.io/rook-ceph-block created</span><br></pre></td></tr></table></figure>
 
 
-<h4 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h4><ol>
+<h2 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h2><ol>
 <li><p><a href="https://kuboard.cn/learning/k8s-intermediate/persistent/ceph/rook-config.html#%E5%AE%89%E8%A3%85-rook-ceph">https://kuboard.cn/learning/k8s-intermediate/persistent/ceph/rook-config.html#%E5%AE%89%E8%A3%85-rook-ceph</a></p>
 </li>
 <li><p><a href="https://www.joyk.com/dig/detail/1585287051590150">https://www.joyk.com/dig/detail/1585287051590150</a></p>
