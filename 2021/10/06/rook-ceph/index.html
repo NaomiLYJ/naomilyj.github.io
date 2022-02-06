@@ -21,15 +21,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="IntroductionThis article is about  What are the preparations for rook-ceph installation How to install rook-operator How to create a ceph cluster How to install rook-ceph with helm chartsPreparation">
+<meta name="description" content="IntroductionThis article is about  What are the preparations for rook-ceph installation How to install rook-operator How to create a ceph cluster How to install rook-ceph with helm charts">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rook-ceph installation">
 <meta property="og:url" content="http://example.com/2021/10/06/rook-ceph/index.html">
 <meta property="og:site_name" content="Yuanjing&#39;s Blog">
-<meta property="og:description" content="IntroductionThis article is about  What are the preparations for rook-ceph installation How to install rook-operator How to create a ceph cluster How to install rook-ceph with helm chartsPreparation">
+<meta property="og:description" content="IntroductionThis article is about  What are the preparations for rook-ceph installation How to install rook-operator How to create a ceph cluster How to install rook-ceph with helm charts">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-06T18:36:42.000Z">
-<meta property="article:modified_time" content="2022-02-06T18:52:50.291Z">
+<meta property="article:modified_time" content="2022-02-06T19:55:55.064Z">
 <meta property="article:author" content="Yuanjing Liu">
 <meta property="article:tag" content="cloud">
 <meta property="article:tag" content="ceph">
@@ -92,7 +92,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">7</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">4</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">8</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -164,7 +164,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -245,7 +245,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-02-06 18:52:50" itemprop="dateModified" datetime="2022-02-06T18:52:50+00:00">2022-02-06</time>
+        <time title="Modified: 2022-02-06 19:55:55" itemprop="dateModified" datetime="2022-02-06T19:55:55+00:00">2022-02-06</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -287,14 +287,15 @@
 <li>What are the preparations for rook-ceph installation</li>
 <li>How to install rook-operator</li>
 <li>How to create a ceph cluster</li>
-<li>How to install rook-ceph with helm charts<h2 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h2></li>
+<li>How to install rook-ceph with helm charts</li>
 </ul>
-<p>For installing ceph in k8s with rook, follwing requirements should be fulfilled</p>
+<span id="more"></span>
+
+<h2 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h2><p>For installing ceph in k8s with rook, follwing requirements should be fulfilled</p>
 <ul>
 <li>kubernetes &gt; v1.17.0</li>
 <li>minimum 3 nodes of kubernetes cluster</li>
-<li>disk  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. The device must have no partitions.</span><br><span class="line">2. The device must not have any LVM state.</span><br><span class="line">3. The device must not be mounted.</span><br><span class="line">4. The device must not contain a file system.</span><br><span class="line">5. The device must not contain a Ceph BlueStore OSD.</span><br><span class="line">6. The device must be larger than 5 GB.</span><br><span class="line"><span class="comment"># check with lsblk</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span></li>
+<li>disk  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. The device must have no partitions.</span><br><span class="line">2. The device must not have any LVM state.</span><br><span class="line">3. The device must not be mounted.</span><br><span class="line">4. The device must not contain a file system.</span><br><span class="line">5. The device must not contain a Ceph BlueStore OSD.</span><br><span class="line">6. The device must be larger than 5 GB.</span><br><span class="line"><span class="comment"># check with lsblk</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="Install-Rook-Operator"><a href="#Install-Rook-Operator" class="headerlink" title="Install Rook Operator"></a>Install Rook Operator</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># download rook release 1.3</span></span><br><span class="line">$ git <span class="built_in">clone</span> --single-branch --branch release-1.3 https://github.com/rook/rook.git</span><br><span class="line"><span class="comment"># configuration files</span></span><br><span class="line">$ <span class="built_in">cd</span> rook/cluster/examples/kubernetes/ceph</span><br><span class="line"></span><br><span class="line">$ kubectl create -f common.yaml</span><br><span class="line">$ kubectl apply -f operator.yaml</span><br><span class="line"><span class="comment">#Output</span></span><br><span class="line">$ configmap/rook-ceph-operator-config created</span><br><span class="line">$ deployment.apps/rook-ceph-operator created</span><br><span class="line"></span><br><span class="line"><span class="comment">#check pods created in rook-ceph</span></span><br><span class="line">$ kubectl get pod -n rook-ceph</span><br><span class="line"><span class="comment">#Output</span></span><br><span class="line">NAME                                  READY   STATUS    RESTARTS   AGE</span><br><span class="line">rook-ceph-operator-599765ff49-fhbz9   1/1     Running   0          92s</span><br><span class="line">rook-discover-6fhlb                   1/1     Running   0          55s</span><br><span class="line">rook-discover-97kmz                   1/1     Running   0          55s</span><br><span class="line">rook-discover-z5k2z                   1/1     Running   0          55s</span><br></pre></td></tr></table></figure>
 
