@@ -29,7 +29,7 @@
 <meta property="og:description" content="IntroductionThis article is about  what is helm charts how to use helm charts how to create helm charts helm charts with helm secrets">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-02-06T15:58:18.000Z">
-<meta property="article:modified_time" content="2022-02-06T16:46:09.252Z">
+<meta property="article:modified_time" content="2022-02-06T18:38:32.522Z">
 <meta property="article:author" content="Yuanjing Liu">
 <meta property="article:tag" content="helm">
 <meta property="article:tag" content="k8s">
@@ -238,7 +238,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-02-06 15:58:18 / Modified: 16:46:09" itemprop="dateCreated datePublished" datetime="2022-02-06T15:58:18+00:00">2022-02-06</time>
+      <time title="Created: 2022-02-06 15:58:18 / Modified: 18:38:32" itemprop="dateCreated datePublished" datetime="2022-02-06T15:58:18+00:00">2022-02-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -280,9 +280,9 @@
 <li>what is helm charts</li>
 <li>how to use helm charts</li>
 <li>how to create helm charts</li>
-<li>helm charts with helm secrets<span id="more"></span>
-<h2 id="What-is-helm-charts"><a href="#What-is-helm-charts" class="headerlink" title="What is helm charts"></a>What is helm charts</h2>According to definition from helm official website (<a target="_blank" rel="noopener" href="https://helm.sh/">https://helm.sh</a>), <code>helm</code> helps you manage Kubernetes applications, and <code>helm charts</code> help you define, install, and upgrade even the most complex Kubernetes application.</li>
+<li>helm charts with helm secrets<span id="more"></span></li>
 </ul>
+<h2 id="What-is-helm-charts"><a href="#What-is-helm-charts" class="headerlink" title="What is helm charts"></a>What is helm charts</h2><p>According to definition from helm official website (<a target="_blank" rel="noopener" href="https://helm.sh/">https://helm.sh</a>), <code>helm</code> helps you manage Kubernetes applications, and <code>helm charts</code> help you define, install, and upgrade even the most complex Kubernetes application.</p>
 <p>Helm charts package all the k8s manifests (YAML files) of your application and make your management of metadata more easily. A helm chart has the following structure</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mychart</span><br><span class="line">├── Chart.yaml</span><br><span class="line">├── charts <span class="comment"># contains other sub charts</span></span><br><span class="line">├── templates <span class="comment"># chart templates (gotemplates)，which are used to render the final k8s manifests with variables defined in values.yaml</span></span><br><span class="line">│   ├── NOTES.txt <span class="comment"># hint message when the user run command helm install</span></span><br><span class="line">│   ├── _helpers.tpl <span class="comment"># some helper code for templates</span></span><br><span class="line">│   ├── xx.yaml <span class="comment"># Kubernetes manifest</span></span><br><span class="line">│   ├── ... <span class="comment"># Kubernetes manifest</span></span><br><span class="line">│   └── tests</span><br><span class="line">│       └── test-connection.yaml</span><br><span class="line">└── values.yaml <span class="comment"># variables for rendering templates when the user run command helm install</span></span><br></pre></td></tr></table></figure>
     </div>
@@ -301,8 +301,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/10/06/rook-ceph/" rel="prev" title="Install ceph with rook in k8s">
-                  <i class="fa fa-chevron-left"></i> Install ceph with rook in k8s
+                <a href="/2021/10/06/rook-ceph/" rel="prev" title="rook-ceph installation">
+                  <i class="fa fa-chevron-left"></i> rook-ceph installation
                 </a>
             </div>
             <div class="post-nav-item">
