@@ -77,6 +77,27 @@
       </tags>
   </entry>
   <entry>
+    <title>helm charts</title>
+    <url>/2022/02/06/helmchart/</url>
+    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This article is about</p>
+<ul>
+<li>what is helm charts</li>
+<li>how to use helm charts</li>
+<li>how to create helm charts</li>
+<li>helm charts with helm secrets<span id="more"></span></li>
+</ul>
+<h2 id="What-is-helm-charts"><a href="#What-is-helm-charts" class="headerlink" title="What is helm charts"></a>What is helm charts</h2><p>According to definition from helm official website (<a href="https://helm.sh/">https://helm.sh</a>), <code>helm</code> helps you manage Kubernetes applications, and <code>helm charts</code> help you define, install, and upgrade even the most complex Kubernetes application.</p>
+<p>Helm charts package all the k8s manifests (YAML files) of your application and make your management of metadata more easily. A helm chart has the following structure</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mychart</span><br><span class="line">├── Chart.yaml</span><br><span class="line">├── charts <span class="comment"># contains other sub charts</span></span><br><span class="line">├── templates <span class="comment"># chart templates (gotemplates)，which are used to render the final k8s manifests with variables defined in values.yaml</span></span><br><span class="line">│   ├── NOTES.txt <span class="comment"># hint message when the user run command helm install</span></span><br><span class="line">│   ├── _helpers.tpl <span class="comment"># some helper code for templates</span></span><br><span class="line">│   ├── xx.yaml <span class="comment"># Kubernetes manifest</span></span><br><span class="line">│   ├── ... <span class="comment"># Kubernetes manifest</span></span><br><span class="line">│   └── tests</span><br><span class="line">│       └── test-connection.yaml</span><br><span class="line">└── values.yaml <span class="comment"># variables for rendering templates when the user run command helm install</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>helm</category>
+      </categories>
+      <tags>
+        <tag>helm</tag>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Install ceph with cephadm</title>
     <url>/2021/10/05/cephadm/</url>
     <content><![CDATA[<h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><p>10.0.2.7 iam02 /dev/sda mon<br>10.0.2.4 openam01 /dev/sdc mon<br>10.0.2.5 opendj01 /dev/sdb mon</p>
@@ -162,27 +183,6 @@
         <tag>cloud</tag>
         <tag>ceph</tag>
         <tag>rook-ceph</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>helm charts</title>
-    <url>/2022/02/06/helmchart/</url>
-    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This article is about</p>
-<ul>
-<li>what is helm charts</li>
-<li>how to use helm charts</li>
-<li>how to create helm charts</li>
-<li>helm charts with helm secrets<span id="more"></span></li>
-</ul>
-<h2 id="What-is-helm-charts"><a href="#What-is-helm-charts" class="headerlink" title="What is helm charts"></a>What is helm charts</h2><p>According to definition from helm official website (<a href="https://helm.sh/">https://helm.sh</a>), <code>helm</code> helps you manage Kubernetes applications, and <code>helm charts</code> help you define, install, and upgrade even the most complex Kubernetes application.</p>
-<p>Helm charts package all the k8s manifests (YAML files) of your application and make your management of metadata more easily. A helm chart has the following structure</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mychart</span><br><span class="line">├── Chart.yaml</span><br><span class="line">├── charts <span class="comment"># contains other sub charts</span></span><br><span class="line">├── templates <span class="comment"># chart templates (gotemplates)，which are used to render the final k8s manifests with variables defined in values.yaml</span></span><br><span class="line">│   ├── NOTES.txt <span class="comment"># hint message when the user run command helm install</span></span><br><span class="line">│   ├── _helpers.tpl <span class="comment"># some helper code for templates</span></span><br><span class="line">│   ├── xx.yaml <span class="comment"># Kubernetes manifest</span></span><br><span class="line">│   ├── ... <span class="comment"># Kubernetes manifest</span></span><br><span class="line">│   └── tests</span><br><span class="line">│       └── test-connection.yaml</span><br><span class="line">└── values.yaml <span class="comment"># variables for rendering templates when the user run command helm install</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>helm</category>
-      </categories>
-      <tags>
-        <tag>helm</tag>
-        <tag>k8s</tag>
       </tags>
   </entry>
 </search>
