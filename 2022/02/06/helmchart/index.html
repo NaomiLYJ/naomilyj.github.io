@@ -21,15 +21,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="IntroductionThis article is about  what is helm charts how to use helm charts how to create helm charts helm charts with helm secrets  based on helm v3.7.1 You can install helm with  1$ curl -sSL http">
+<meta name="description" content="IntroductionThis article is about  what is helm charts how to use helm charts how to create helm charts helm charts with helm secrets">
 <meta property="og:type" content="article">
 <meta property="og:title" content="helm charts">
 <meta property="og:url" content="http://example.com/2022/02/06/helmchart/index.html">
 <meta property="og:site_name" content="Yuanjing&#39;s Blog">
-<meta property="og:description" content="IntroductionThis article is about  what is helm charts how to use helm charts how to create helm charts helm charts with helm secrets  based on helm v3.7.1 You can install helm with  1$ curl -sSL http">
+<meta property="og:description" content="IntroductionThis article is about  what is helm charts how to use helm charts how to create helm charts helm charts with helm secrets">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-02-06T15:58:18.000Z">
-<meta property="article:modified_time" content="2022-02-07T21:35:22.612Z">
+<meta property="article:modified_time" content="2022-02-07T21:38:31.408Z">
 <meta property="article:author" content="Yuanjing Liu">
 <meta property="article:tag" content="helm">
 <meta property="article:tag" content="k8s">
@@ -244,7 +244,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-02-07 21:35:22" itemprop="dateModified" datetime="2022-02-07T21:35:22+00:00">2022-02-07</time>
+        <time title="Modified: 2022-02-07 21:38:31" itemprop="dateModified" datetime="2022-02-07T21:38:31+00:00">2022-02-07</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -286,12 +286,11 @@
 <li>what is helm charts</li>
 <li>how to use helm charts</li>
 <li>how to create helm charts</li>
-<li>helm charts with helm secrets</li>
+<li>helm charts with helm secrets<span id="more"></span></li>
 </ul>
 <p>based on helm <code>v3.7.1</code></p>
 <p>You can install helm with </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -sSL https://get.helm.sh/helm-v3.7.1-linux-amd64.tar.gz | tar --strip-components 1 -xzC /usr/bin linux-amd64/helm &amp;&amp; chmod +x /usr/bin/helm</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
 
 
 <h2 id="What-is-helm-charts"><a href="#What-is-helm-charts" class="headerlink" title="What is helm charts"></a>What is helm charts</h2><p>According to definition from helm official website (<a target="_blank" rel="noopener" href="https://helm.sh/">https://helm.sh</a>), <code>helm</code> helps you manage Kubernetes applications, and <code>helm charts</code> help you define, install, and upgrade even the most complex Kubernetes application.</p>
@@ -307,7 +306,7 @@
 <h2 id="How-to-create-helm-charts"><a href="#How-to-create-helm-charts" class="headerlink" title="How to create helm charts"></a>How to create helm charts</h2><h3 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h3><p>To create a helm chart, you could simply run </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ helm create foo</span><br><span class="line"><span class="comment"># The following files will be generated</span></span><br><span class="line">foo/</span><br><span class="line">├── .helmignore   <span class="comment"># Contains patterns to ignore when packaging Helm charts.</span></span><br><span class="line">├── Chart.yaml    <span class="comment"># Information about your chart</span></span><br><span class="line">├── values.yaml   <span class="comment"># The default values for your templates</span></span><br><span class="line">├── charts/       <span class="comment"># Charts that this chart depends on</span></span><br><span class="line">└── templates/    <span class="comment"># The template files</span></span><br><span class="line">    └── tests/    <span class="comment"># The test files</span></span><br></pre></td></tr></table></figure>
 
-<p>For details of helm chart grammar, please refer to []</p>
+<p>For details of helm chart grammar, please refer to <a target="_blank" rel="noopener" href="https://naomilyj.github.io/2022/02/07/helmtemplates/">helm templates</a></p>
 <h3 id="Lint"><a href="#Lint" class="headerlink" title="Lint"></a>Lint</h3><p>To lint your chart</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ helm lint /path/to/your/chart</span><br></pre></td></tr></table></figure>
 

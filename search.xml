@@ -84,12 +84,11 @@
 <li>what is helm charts</li>
 <li>how to use helm charts</li>
 <li>how to create helm charts</li>
-<li>helm charts with helm secrets</li>
+<li>helm charts with helm secrets<span id="more"></span></li>
 </ul>
 <p>based on helm <code>v3.7.1</code></p>
 <p>You can install helm with </p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ curl -sSL https://get.helm.sh/helm-v3.7.1-linux-amd64.tar.gz | tar --strip-components 1 -xzC /usr/bin linux-amd64/helm &amp;&amp; chmod +x /usr/bin/helm</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
 
 
 <h2 id="What-is-helm-charts"><a href="#What-is-helm-charts" class="headerlink" title="What is helm charts"></a>What is helm charts</h2><p>According to definition from helm official website (<a href="https://helm.sh/">https://helm.sh</a>), <code>helm</code> helps you manage Kubernetes applications, and <code>helm charts</code> help you define, install, and upgrade even the most complex Kubernetes application.</p>
@@ -105,7 +104,7 @@
 <h2 id="How-to-create-helm-charts"><a href="#How-to-create-helm-charts" class="headerlink" title="How to create helm charts"></a>How to create helm charts</h2><h3 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h3><p>To create a helm chart, you could simply run </p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ helm create foo</span><br><span class="line"><span class="comment"># The following files will be generated</span></span><br><span class="line">foo/</span><br><span class="line">├── .helmignore   <span class="comment"># Contains patterns to ignore when packaging Helm charts.</span></span><br><span class="line">├── Chart.yaml    <span class="comment"># Information about your chart</span></span><br><span class="line">├── values.yaml   <span class="comment"># The default values for your templates</span></span><br><span class="line">├── charts/       <span class="comment"># Charts that this chart depends on</span></span><br><span class="line">└── templates/    <span class="comment"># The template files</span></span><br><span class="line">    └── tests/    <span class="comment"># The test files</span></span><br></pre></td></tr></table></figure>
 
-<p>For details of helm chart grammar, please refer to []</p>
+<p>For details of helm chart grammar, please refer to <a href="https://naomilyj.github.io/2022/02/07/helmtemplates/">helm templates</a></p>
 <h3 id="Lint"><a href="#Lint" class="headerlink" title="Lint"></a>Lint</h3><p>To lint your chart</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ helm lint /path/to/your/chart</span><br></pre></td></tr></table></figure>
 
