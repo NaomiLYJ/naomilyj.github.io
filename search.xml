@@ -112,7 +112,7 @@
 <h3 id="Package-and-Push"><a href="#Package-and-Push" class="headerlink" title="Package and Push"></a>Package and Push</h3><p>To package your chart and push to helm chart registry, there are 2 methods</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Method 1</span></span><br><span class="line">$ helm package /path/to/your/chart</span><br><span class="line">Successfully packaged chart and saved it to: /my/path/hello-world-0.1.0.tgz</span><br><span class="line">$ helm push hello-world-0.1.0.tgz oci://harbor.mydomain.com/chartrepo/library --insecure-skip-tls-verify</span><br><span class="line"><span class="comment"># Directly push directory</span></span><br><span class="line">$ helm push /path/to/your/chart oci://harbor.mydomain.com/chartrepo/library --insecure-skip-tls-verify</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 2 (old version and is removed)</span></span><br><span class="line">$ helm chart save /path/to/your/chart harbor.mydomain.com/chartrepo/library/chart-name:chart-version</span><br><span class="line">$ helm chart push harbor.mydomain.com/chartrepo/library/chart-name:chart-version</span><br><span class="line"></span><br><span class="line"><span class="comment"># Note, before push, you need to login to helm registry and</span></span><br><span class="line">$ <span class="built_in">export</span> HELM_EXPERIMENTAL_OCI=1</span><br><span class="line">$ helm plugin install https://github.com/chartmuseum/helm-push.git --version master</span><br></pre></td></tr></table></figure>
 
-<h2 id="helm-charts-with-helm-secrets"><a href="#helm-charts-with-helm-secrets" class="headerlink" title="helm charts with helm secrets"></a>helm charts with helm secrets</h2><p>Some variables in <code>values.yaml</code> are sensitive data, e.g, passwords, which should be encrypted. <a href="https://github.com/jkroepke/helm-secrets/wiki/Usage">helm secrets</a> is a helm plugin to do this job.</p>
+<h2 id="Helm-charts-with-helm-secrets"><a href="#Helm-charts-with-helm-secrets" class="headerlink" title="Helm charts with helm secrets"></a>Helm charts with helm secrets</h2><p>Some variables in <code>values.yaml</code> are sensitive data, e.g, passwords, which should be encrypted. <a href="https://github.com/jkroepke/helm-secrets/wiki/Usage">helm secrets</a> is a helm plugin to do this job.</p>
 <p>This plugin provides ability to encrypt/decrypt secrets files to store in less secure places, before they are installed using<br>Helm. To decrypt/encrypt/edit you need to initialize/first encrypt secrets with sops - <a href="https://github.com/mozilla/sops">https://github.com/mozilla/sops</a></p>
 <h3 id="To-install-sops-and-helm-secrets"><a href="#To-install-sops-and-helm-secrets" class="headerlink" title="To install sops and helm secrets"></a>To install <code>sops</code> and <code>helm secrets</code></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ curl -O -L -C - https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux -o /usr/bin/sops &amp;&amp; chmod +x /usr/bin/sops</span><br><span class="line">$ helm plugin install https://github.com/jkroepke/helm-secrets --version v3.11.0</span><br></pre></td></tr></table></figure>
 
@@ -266,5 +266,17 @@
     <title>kubeflow</title>
     <url>/2022/02/06/kubeflow/</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>helmtemplates</title>
+    <url>/2022/02/07/helmtemplates/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>helm</category>
+      </categories>
+      <tags>
+        <tag>helm</tag>
+        <tag>k8s</tag>
+      </tags>
   </entry>
 </search>
