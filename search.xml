@@ -267,9 +267,61 @@
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>helmtemplates</title>
+    <title>helm templates</title>
     <url>/2022/02/07/helmtemplates/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This article is about some frequently used objects and functions in go templates</p>
+<ul>
+<li>Release</li>
+<li>Values</li>
+<li>Chart</li>
+<li>Files</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="Release"><a href="#Release" class="headerlink" title="Release"></a>Release</h2><ul>
+<li><code>Release.Name</code>: name of the release, obtained from installation, e.g, helm install release-name chart args</li>
+<li><code>Release.Time</code></li>
+<li><code>Release.Namespace</code>: namespace to deploy the chart, obtained from installation flag –namespace</li>
+<li><code>Release.Revision</code>: revision number, from 1</li>
+<li><code>Release.Isupgrade</code>: whether current operation is upgrade, true/false</li>
+<li><code>Release.Install</code>: whether current operation is install, true/false</li>
+</ul>
+<h2 id="Values"><a href="#Values" class="headerlink" title="Values"></a>Values</h2><p>value from <code>values.yaml</code>, e.g. </p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">image:</span> <span class="string">gcr.io/app:latest</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Chart"><a href="#Chart" class="headerlink" title="Chart"></a>Chart</h2><ul>
+<li><code>Chart.Name</code>: name of the chart, defined in <code>Chart.yaml</code></li>
+</ul>
+<h2 id="Files"><a href="#Files" class="headerlink" title="Files"></a>Files</h2><p>Files could be used to visit non special files in the chart。</p>
+<p>Let’s say if we have 3 files under <code>mychart/</code></p>
+<p>config1.toml</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">message = Hello from config 1</span><br></pre></td></tr></table></figure>
+
+<p>config2.toml</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">message = Hello from config 2</span><br></pre></td></tr></table></figure>
+
+<p>config3.toml</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">message = Hello from config 3</span><br></pre></td></tr></table></figure>
+
+<p>We could read the content of the files and feed to <code>ConfigMap</code> template</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> &#123;&#123; <span class="string">.Release.Name</span> &#125;&#125;<span class="string">-configmap</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  &#123;&#123;<span class="bullet">-</span> <span class="string">$files</span> <span class="string">:=</span> <span class="string">.Files</span> &#125;&#125;</span><br><span class="line">  &#123;&#123;<span class="bullet">-</span> <span class="string">range</span> <span class="string">tuple</span> <span class="string">&quot;config1.toml&quot;</span> <span class="string">&quot;config2.toml&quot;</span> <span class="string">&quot;config3.toml&quot;</span> &#125;&#125;</span><br><span class="line">  &#123;&#123; <span class="string">.</span> &#125;&#125;<span class="string">:</span> <span class="string">|-</span></span><br><span class="line"><span class="string">    &#123;&#123; $files.Get . &#125;&#125;</span></span><br><span class="line"><span class="string"></span>  &#123;&#123;<span class="bullet">-</span> <span class="string">end</span> &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>Here we state a variable <code>$files</code> to store the reference to <code>.Files</code> obejct, and use <code>tuple</code> function to loop through the file list. The rendered template looks like</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Source: mychart/templates/configmap.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">mychart-1576046462-configmap</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">config1.toml:</span> <span class="string">|-</span></span><br><span class="line"><span class="string">    message = Hello from config 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">  <span class="attr">config2.toml:</span> <span class="string">|-</span></span><br><span class="line"><span class="string">    message = Hello from config 2</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">  <span class="attr">config3.toml:</span> <span class="string">|-</span></span><br><span class="line"><span class="string">    message = Hello from config 3</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Files-Glob"><a href="#Files-Glob" class="headerlink" title="Files.Glob"></a>Files.Glob</h3><p><code>Files.Glob</code> helps get files of a specific pattern<br>For example if we have the files</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">foo/</span><br><span class="line">    foo.txt</span><br><span class="line">    foo.yaml</span><br><span class="line">bar/</span><br><span class="line">    bar.txt</span><br><span class="line">    bar.yaml</span><br></pre></td></tr></table></figure>
+
+<p>We could use <code>File.Glob</code> to select all yaml files</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line">&#123;&#123; <span class="string">range</span> <span class="string">$path</span> <span class="string">:=</span> <span class="string">.Files.Glob</span> <span class="string">&quot;**.yaml&quot;</span> &#125;&#125;</span><br><span class="line">&#123;&#123; <span class="string">$path</span> &#125;&#125;<span class="string">:</span> <span class="string">|</span></span><br><span class="line">&#123;&#123; <span class="string">.Files.Get</span> <span class="string">$path</span> &#125;&#125;</span><br><span class="line">&#123;&#123; <span class="string">end</span> &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>or all the files under a specified folder</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line">&#123;&#123; <span class="string">range</span> <span class="string">$path</span>, <span class="string">$bytes</span> <span class="string">:=</span> <span class="string">.Files.Glob</span> <span class="string">&quot;foo/*&quot;</span> &#125;&#125;</span><br><span class="line">&#123;&#123; <span class="string">$path</span> &#125;&#125;<span class="string">:</span> <span class="string">&#x27;<span class="template-variable">&#123;&#123; b64enc $bytes &#125;&#125;</span>&#x27;</span></span><br><span class="line">&#123;&#123; <span class="string">end</span> &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>We could also generate configmaps and secrets from files</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">conf</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">&#123;&#123; <span class="string">(.Files.Glob</span> <span class="string">&quot;foo/*&quot;</span><span class="string">).AsConfig</span> <span class="string">|</span> <span class="string">indent</span> <span class="number">2</span> &#125;&#125;</span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Secret</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">very-secret</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">Opaque</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">&#123;&#123; <span class="string">(.Files.Glob</span> <span class="string">&quot;bar/*&quot;</span><span class="string">).AsSecrets</span> <span class="string">|</span> <span class="string">indent</span> <span class="number">2</span> &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Files-lines"><a href="#Files-lines" class="headerlink" title="Files.lines"></a>Files.lines</h3><p>Use lines to loop through each line of a file content</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">some-file.txt:</span> &#123;&#123; <span class="string">range</span> <span class="string">.Files.Lines</span> <span class="string">&quot;foo/bar.txt&quot;</span> &#125;&#125;</span><br><span class="line">    &#123;&#123; <span class="string">.</span> &#125;&#125;&#123;&#123; <span class="string">end</span> &#125;&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>helm</category>
       </categories>
