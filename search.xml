@@ -271,10 +271,18 @@
     <url>/2022/02/07/helmtemplates/</url>
     <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This article is about some frequently used objects and functions in go templates</p>
 <ul>
+<li>Internal Objects<ul>
 <li>Release</li>
 <li>Values</li>
 <li>Chart</li>
 <li>Files</li>
+</ul>
+</li>
+<li>Functions<ul>
+<li>default</li>
+<li>operations: eq、ne、lt、gt、and、or</li>
+</ul>
+</li>
 </ul>
 <span id="more"></span>
 
