@@ -234,7 +234,35 @@
   <entry>
     <title>gitlab</title>
     <url>/2022/02/06/gitlab/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>Here‘s a collection of gitlab related commands for personal usage。</p>
+<h2 id="Commands"><a href="#Commands" class="headerlink" title="Commands"></a>Commands</h2><ul>
+<li><p>tag a branch</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Checkout to the target branch</span></span><br><span class="line">$ git checkout master</span><br><span class="line"><span class="comment"># Tag the branch</span></span><br><span class="line">$ git tag &lt;tag&gt; / git tag -a &lt;tag&gt; -m <span class="string">&quot;this is tag&quot;</span></span><br><span class="line"><span class="comment"># Push the tag to remote</span></span><br><span class="line">$ git push origin --tags</span><br></pre></td></tr></table></figure></li>
+<li><p>delete a local tag</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag -d &lt;tag&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>delete a remote tag</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push --delete origin &lt;tag&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>merge changes from master to feature branch (merge)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout FEATURE-BRANCH</span><br><span class="line">$ git merge --no-edit master</span><br><span class="line">$ git push origin FEATURE-BRANCH</span><br><span class="line"><span class="comment"># This results in non-linear history</span></span><br></pre></td></tr></table></figure></li>
+<li><p>merge changes from master to feature branch (rebase)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Checkout the FEATURE-BRANCH</span></span><br><span class="line">$ git checkout FEATURE-BRANCH</span><br><span class="line"><span class="comment"># Sync your main branch (master) with the latest changes</span></span><br><span class="line">$ git fetch origin</span><br><span class="line">$ git rebase origin/master</span><br><span class="line"><span class="comment"># Fix merge conflicts and add the fixed files</span></span><br><span class="line">$ git add FILE</span><br><span class="line"><span class="comment"># Continue</span></span><br><span class="line">$ git rebase --<span class="built_in">continue</span></span><br><span class="line"><span class="comment"># or skip it if there is complain that no changes after resolving all conflicts</span></span><br><span class="line">$ git rebase --skip</span><br><span class="line"><span class="comment"># Repeat in the subsequent commits until complete (Without the --force flag, your remote branch will continue to believe it is out of sync and will claim a merge conflict)</span></span><br><span class="line">$ git push origin HEAD --force</span><br></pre></td></tr></table></figure></li>
+<li><p>rename a branch name</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Checkout the old branch</span></span><br><span class="line">$ git checkout OLD-NAME</span><br><span class="line"><span class="comment"># Give new name</span></span><br><span class="line">$ git branch -m NEW-NAME</span><br><span class="line"><span class="comment"># Push to the remote</span></span><br><span class="line">$ git push origin -u NEW-NAME</span><br><span class="line"><span class="comment"># Delete the old one</span></span><br><span class="line">$ git push origin --delete OLD-NAME</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Configurations"><a href="#Configurations" class="headerlink" title="Configurations"></a>Configurations</h2><ul>
+<li>push rules<br>^(build|ci|docs|feat|fix|perf|refactor|revert|style|test|chore)(((\S+\s*)+))?: \S+|Merge \S+|Revert “|Apply </li>
+</ul>
+<h2 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI/CD"></a>CI/CD</h2><ul>
+<li>variables: variables defined in the job could only be used in the job</li>
+<li>stages: stages could not be merged by multiple templates</li>
+<li>stages with <code>need</code>: if one job failed, the whole pipeline failed, but the job will run if it’s needed job in previous stage succeeds.</li>
+<li>stages without <code>need</code>: if one job failed, then all job in the next stages are skipped</li>
+<li>artifacts: artifacts from all previous stages are passed by default</li>
+</ul>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a href="https://www.verdantfox.com/blog/view/how-to-git-rebase-mainmaster-onto-your-feature-branch-even-with-merge-conflicts">https://www.verdantfox.com/blog/view/how-to-git-rebase-mainmaster-onto-your-feature-branch-even-with-merge-conflicts</a></li>
+</ol>
+]]></content>
   </entry>
   <entry>
     <title>helmfile</title>
@@ -281,6 +309,24 @@
 
 <h2 id="helmfile-with-secrets-management"><a href="#helmfile-with-secrets-management" class="headerlink" title="helmfile with secrets management"></a>helmfile with secrets management</h2><p>In environment values, some sensitive variables should always be encrypted. Helmfile supports also secrets, the secrets parameter in a helmfile.yaml causes the helm-secrets plugin to be executed to decrypt the secrets.yaml file before rendering the templates. (helm plugin secrets should be installed to used this feature).</p>
 <p>The secrets usage in helmfile is the same as in helm chart, a detailed introduction could be found in previous post about <a href="https://naomilyj.github.io/2022/02/06/helmchart/">helm chart</a>.</p>
+<h2 id="helmfile-hook-and-kustomize"><a href="#helmfile-hook-and-kustomize" class="headerlink" title="helmfile hook and kustomize"></a>helmfile hook and kustomize</h2><h3 id="hook"><a href="#hook" class="headerlink" title="hook"></a>hook</h3><p>A Helmfile hook is a per-release extension point that is composed of:</p>
+<ul>
+<li>events</li>
+<li>command</li>
+<li>args</li>
+<li>showlogs</li>
+</ul>
+<p>Helmfile triggers various events while it is running. Once events are triggered, associated hooks are executed, by running the command with args. The standard output of the command will be displayed if showlogs is set and it’s value is true.</p>
+<p>Currently supported events are:</p>
+<ul>
+<li>prepare</li>
+<li>presync</li>
+<li>preuninstall</li>
+<li>postuninstall</li>
+<li>postsync</li>
+<li>cleanup</li>
+</ul>
+<h3 id="kustomize"><a href="#kustomize" class="headerlink" title="kustomize"></a>kustomize</h3><p>The way how helmfile could be used to manage kustomize manifests is based on hook. The preinstall hook will create a temp helm chart from rendered resources using kustomize command</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li><a href="https://github.com/roboll/helmfile">https://github.com/roboll/helmfile</a></li>
 <li><a href="https://github.com/NaomiLYJ/helmfile-templates">https://github.com/NaomiLYJ/helmfile-templates</a></li>
