@@ -234,7 +234,7 @@
   <entry>
     <title>gitlab</title>
     <url>/2022/02/06/gitlab/</url>
-    <content><![CDATA[<p>Here‘s a collection of gitlab related commands for personal usage。</p>
+    <content><![CDATA[<p>Here’s a collection of gitlab related commands for personal usage.</p>
 <h2 id="Commands"><a href="#Commands" class="headerlink" title="Commands"></a>Commands</h2><ul>
 <li><p>tag a branch</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Checkout to the target branch</span></span><br><span class="line">$ git checkout master</span><br><span class="line"><span class="comment"># Tag the branch</span></span><br><span class="line">$ git tag &lt;tag&gt; / git tag -a &lt;tag&gt; -m <span class="string">&quot;this is tag&quot;</span></span><br><span class="line"><span class="comment"># Push the tag to remote</span></span><br><span class="line">$ git push origin --tags</span><br></pre></td></tr></table></figure></li>
@@ -250,7 +250,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Checkout the old branch</span></span><br><span class="line">$ git checkout OLD-NAME</span><br><span class="line"><span class="comment"># Give new name</span></span><br><span class="line">$ git branch -m NEW-NAME</span><br><span class="line"><span class="comment"># Push to the remote</span></span><br><span class="line">$ git push origin -u NEW-NAME</span><br><span class="line"><span class="comment"># Delete the old one</span></span><br><span class="line">$ git push origin --delete OLD-NAME</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="Configurations"><a href="#Configurations" class="headerlink" title="Configurations"></a>Configurations</h2><ul>
-<li>push rules<br>^(build|ci|docs|feat|fix|perf|refactor|revert|style|test|chore)(((\S+\s*)+))?: \S+|Merge \S+|Revert “|Apply </li>
+<li>push rules<br><code>^(build|ci|docs|feat|fix|perf|refactor|revert|style|test|chore)(\((\S+\s*)+\))?: \S+|Merge \S+|Revert &quot;|Apply</code></li>
 </ul>
 <h2 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI/CD"></a>CI/CD</h2><ul>
 <li>variables: variables defined in the job could only be used in the job</li>
@@ -258,6 +258,10 @@
 <li>stages with <code>need</code>: if one job failed, the whole pipeline failed, but the job will run if it’s needed job in previous stage succeeds.</li>
 <li>stages without <code>need</code>: if one job failed, then all job in the next stages are skipped</li>
 <li>artifacts: artifacts from all previous stages are passed by default</li>
+<li>needs: does not work with rules, but with except</li>
+<li>MR: any update to the MR will trigger push event, CI_COMMI_BRANCH -&gt; target branch</li>
+<li>tag: is push event,  CI_COMMIT_BRANCH=null, CI_COMMIT_TAG!=null</li>
+<li>docs generation job should be exactly <code>pages</code></li>
 </ul>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li><a href="https://www.verdantfox.com/blog/view/how-to-git-rebase-mainmaster-onto-your-feature-branch-even-with-merge-conflicts">https://www.verdantfox.com/blog/view/how-to-git-rebase-mainmaster-onto-your-feature-branch-even-with-merge-conflicts</a></li>
