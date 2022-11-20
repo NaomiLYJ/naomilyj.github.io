@@ -193,7 +193,7 @@
       </tags>
   </entry>
   <entry>
-    <title>rook-ceph installation</title>
+    <title>Install ceph with rook-ceph</title>
     <url>/2021/10/06/rook-ceph/</url>
     <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This note is about how to install ceph cluster in k8s cluster with rook-ceph</p>
 <ul>
