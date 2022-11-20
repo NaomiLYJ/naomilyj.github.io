@@ -21,15 +21,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="IntroductionThis article is about  what is helm charts how to use helm charts how to create helm charts helm charts with helm secrets">
+<meta name="description" content="IntroductionThis note is about  what is helm charts how to use helm charts how to create helm charts helm charts with helm secrets">
 <meta property="og:type" content="article">
 <meta property="og:title" content="helm charts">
 <meta property="og:url" content="http://example.com/2022/02/06/helmchart/index.html">
 <meta property="og:site_name" content="Yuanjing&#39;s Blog">
-<meta property="og:description" content="IntroductionThis article is about  what is helm charts how to use helm charts how to create helm charts helm charts with helm secrets">
+<meta property="og:description" content="IntroductionThis note is about  what is helm charts how to use helm charts how to create helm charts helm charts with helm secrets">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-02-06T15:58:18.000Z">
-<meta property="article:modified_time" content="2022-02-07T21:38:31.408Z">
+<meta property="article:modified_time" content="2022-11-20T20:15:33.895Z">
 <meta property="article:author" content="Yuanjing Liu">
 <meta property="article:tag" content="helm">
 <meta property="article:tag" content="k8s">
@@ -244,7 +244,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-02-07 21:38:31" itemprop="dateModified" datetime="2022-02-07T21:38:31+00:00">2022-02-07</time>
+        <time title="Modified: 2022-11-20 20:15:33" itemprop="dateModified" datetime="2022-11-20T20:15:33+00:00">2022-11-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,13 +281,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This article is about</p>
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This note is about</p>
 <ul>
 <li>what is helm charts</li>
 <li>how to use helm charts</li>
 <li>how to create helm charts</li>
-<li>helm charts with helm secrets<span id="more"></span></li>
+<li>helm charts with helm secrets</li>
 </ul>
+<span id="more"></span>
 <p>based on helm <code>v3.7.1</code></p>
 <p>You can install helm with </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -sSL https://get.helm.sh/helm-v3.7.1-linux-amd64.tar.gz | tar --strip-components 1 -xzC /usr/bin linux-amd64/helm &amp;&amp; chmod +x /usr/bin/helm</span><br></pre></td></tr></table></figure>
