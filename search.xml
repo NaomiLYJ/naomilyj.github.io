@@ -687,7 +687,7 @@
   </entry>
   <entry>
     <title>Ceph - crushmap and crushrule</title>
-    <url>/1970/01/01/ceph-crushrule/</url>
+    <url>/2022/11/20/ceph-crushrule/</url>
     <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This note is to introduce the crushrule feature in ceph storage.</p>
 <p>The CRUSH algorithm determines how to store and retrieve data by computing storage locations. CRUSH uses a map of your cluster (the CRUSH map) to pseudo-randomly map data to OSDs, distributing it across the cluster according to configured replication policy and failure domain. This ensures that replicas or erasure code shards are distributed across hosts and that a single host or other failure will not affect availability.</p>
 <span id="more"></span>
