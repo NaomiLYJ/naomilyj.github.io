@@ -29,7 +29,7 @@
 <meta property="og:description" content="CephadmIntroductionThis note is about how to install cep cluster with cephadm.  What are the preparations for the installation How to install components Basic usage">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-05T15:56:43.000Z">
-<meta property="article:modified_time" content="2022-11-20T17:40:45.069Z">
+<meta property="article:modified_time" content="2022-11-20T20:08:41.027Z">
 <meta property="article:author" content="Yuanjing Liu">
 <meta property="article:tag" content="cloud">
 <meta property="article:tag" content="ceph">
@@ -245,7 +245,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-11-20 17:40:45" itemprop="dateModified" datetime="2022-11-20T17:40:45+00:00">2022-11-20</time>
+        <time title="Modified: 2022-11-20 20:08:41" itemprop="dateModified" datetime="2022-11-20T20:08:41+00:00">2022-11-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -339,9 +339,9 @@
 </li>
 </ul>
 <h2 id="Trouble-shooting"><a href="#Trouble-shooting" class="headerlink" title="Trouble shooting"></a>Trouble shooting</h2><ol>
-<li>416[invalidrange] -&gt; mon_max_pg_per_osd when putting object to bucket <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ceph config <span class="built_in">set</span> mon mon_max_pg_per_osd 1000</span><br></pre></td></tr></table></figure>
-<strong>Note</strong>:</li>
+<li>416[invalidrange] -&gt; mon_max_pg_per_osd when putting object to bucket <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ceph config <span class="built_in">set</span> mon mon_max_pg_per_osd 1000</span><br></pre></td></tr></table></figure></li>
 </ol>
+<p><strong>Note</strong>:</p>
 <p>Ceph RBD and CephFS both supports filesystem</p>
 <ul>
 <li>ceph rbd: supports the volume shared by pods running on the same node, low latency, good I/O</li>

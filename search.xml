@@ -161,9 +161,9 @@
 </li>
 </ul>
 <h2 id="Trouble-shooting"><a href="#Trouble-shooting" class="headerlink" title="Trouble shooting"></a>Trouble shooting</h2><ol>
-<li>416[invalidrange] -&gt; mon_max_pg_per_osd when putting object to bucket <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ceph config <span class="built_in">set</span> mon mon_max_pg_per_osd 1000</span><br></pre></td></tr></table></figure>
-<strong>Note</strong>:</li>
+<li>416[invalidrange] -&gt; mon_max_pg_per_osd when putting object to bucket <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ceph config <span class="built_in">set</span> mon mon_max_pg_per_osd 1000</span><br></pre></td></tr></table></figure></li>
 </ol>
+<p><strong>Note</strong>:</p>
 <p>Ceph RBD and CephFS both supports filesystem</p>
 <ul>
 <li>ceph rbd: supports the volume shared by pods running on the same node, low latency, good I/O</li>
