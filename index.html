@@ -83,9 +83,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">9</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">10</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">3</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">9</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">10</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -933,7 +933,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-02-06 19:55:55" itemprop="dateModified" datetime="2022-02-06T19:55:55+00:00">2022-02-06</time>
+        <time title="Modified: 2022-11-20 19:42:26" itemprop="dateModified" datetime="2022-11-20T19:42:26+00:00">2022-11-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -952,14 +952,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>3.9k</span>
+      <span>24k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>4 mins.</span>
+      <span>22 mins.</span>
     </span>
 </div>
 
@@ -970,12 +970,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This article is about</p>
+          <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This note is about how to install ceph cluster in k8s cluster with rook-ceph</p>
 <ul>
-<li>What are the preparations for rook-ceph installation</li>
-<li>How to install rook-operator</li>
-<li>How to create a ceph cluster</li>
-<li>How to install rook-ceph with helm charts</li>
+<li>What are the preparations for the installation</li>
+<li>install with k8s manifests (release-1.3)</li>
+<li>How to install rook-ceph with helm charts (v1.8.3)</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
@@ -1041,7 +1040,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-11-20 16:48:42" itemprop="dateModified" datetime="2022-11-20T16:48:42+00:00">2022-11-20</time>
+        <time title="Modified: 2022-11-20 17:40:45" itemprop="dateModified" datetime="2022-11-20T17:40:45+00:00">2022-11-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1060,7 +1059,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>6.4k</span>
+      <span>6.6k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -1078,76 +1077,20 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a>Cephadm</h1><h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><p>10.0.2.7 node01 /dev/sda mon<br>10.0.2.4 node02 /dev/sdc mon<br>10.0.2.5 node03 /dev/sdb mon</p>
-<h2 id="Prepare-Environment"><a href="#Prepare-Environment" class="headerlink" title="Prepare Environment"></a>Prepare Environment</h2><ul>
-<li>ntp</li>
-<li>python3 </li>
-<li>container runtime (each component of ceph would be started as a container)</li>
-<li>ssh environment</li>
-<li>repo source  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ wget --silent --remote-name --location https://github.com/ceph/ceph/raw/pacific/src/cephadm/cephadm</span><br><span class="line">$ chmod +x cephadm</span><br><span class="line">$ ./cephadm add-repo --release pacific</span><br><span class="line">$ ./cephadm install</span><br><span class="line">$ apt-get update</span><br></pre></td></tr></table></figure>
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2>Note: Try to install with root user to avoid some issues<h3 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cephadm bootstrap --mon-ip 10.0.2.7  --cluster-network 10.0.2.0/24</span><br><span class="line"><span class="comment"># Note: store the dashboard login credentials in the initialization logs</span></span><br><span class="line"><span class="comment"># Create user for dashboard</span></span><br><span class="line">$ ceph dashboard set-login-credentials yuanjing -i secret-yuanjing</span><br></pre></td></tr></table></figure>
-<h3 id="Access-cluster"><a href="#Access-cluster" class="headerlink" title="Access cluster"></a>Access cluster</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check cluster status</span></span><br><span class="line">$ cephadm shell -- ceph -s</span><br><span class="line"><span class="comment"># check osd status</span></span><br><span class="line">$ cephadm shell -- ceph osd tree</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="Add-other-nodes-to-cluster"><a href="#Add-other-nodes-to-cluster" class="headerlink" title="Add other nodes to cluster"></a>Add other nodes to cluster</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># copy ssh pub key (ceph.pub) generated by ceph to other nodes</span></span><br><span class="line">$ ssh-copy-id -f -i /etc/ceph/ceph.pub node02</span><br><span class="line">$ ssh-copy-id -f -i /etc/ceph/ceph.pub node03</span><br><span class="line"><span class="comment"># add nodes</span></span><br><span class="line">$ ceph orch host add node02 10.0.2.4</span><br><span class="line">$ ceph orch host add node03 10.0.2.5</span><br><span class="line"></span><br><span class="line"><span class="comment"># check cluster status (mon and mgr will be deployed on nodes automatically)</span></span><br><span class="line">$ ceph -s</span><br></pre></td></tr></table></figure>
-<h3 id="Deploy-osd"><a href="#Deploy-osd" class="headerlink" title="Deploy osd"></a>Deploy osd</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check available devices</span></span><br><span class="line">$ osd orch device ls</span><br><span class="line"><span class="comment"># A storage device is considered available if all of the following conditions are met:</span></span><br><span class="line"><span class="comment"># The device must have no partitions.</span></span><br><span class="line"><span class="comment"># The device must not have any LVM state.</span></span><br><span class="line"><span class="comment"># The device must not be mounted.</span></span><br><span class="line"><span class="comment"># The device must not contain a file system.</span></span><br><span class="line"><span class="comment"># The device must not contain a Ceph BlueStore OSD.</span></span><br><span class="line"><span class="comment"># The device must be larger than 5 GB.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># deploy all available devices</span></span><br><span class="line">$ ceph orch apply osd --all-available-devices</span><br><span class="line"></span><br><span class="line"><span class="comment"># add new osd</span></span><br><span class="line">$ ceph orch daemon add osd hostname:/dev/sdb</span><br></pre></td></tr></table></figure>
-<h3 id="Deploy-mds-CephFS"><a href="#Deploy-mds-CephFS" class="headerlink" title="Deploy mds (CephFS)"></a>Deploy mds (CephFS)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create pool for data and metadata </span></span><br><span class="line">$ ceph osd pool create cephfs1_data 64 64</span><br><span class="line">$ ceph osd pool create cephfs1_metadata 64 64</span><br><span class="line"><span class="comment"># create a fs</span></span><br><span class="line">$ ceph fs new cephfs-demo1 cephfs1_metadata cephfs1_data</span><br><span class="line"></span><br><span class="line"><span class="comment"># or with fs volume, pool will be automatically created in this case with default pg and pgp</span></span><br><span class="line">$ ceph fs volume create cephfs-demo2 <span class="string">&quot;node01,node02,node03&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or with orch apply, multiple mds will be created, if cephfs-demo1 is already created, the placement will be updated</span></span><br><span class="line">$ ceph orch apply mds cephfs-demo1 --placement=<span class="string">&quot;3 node01 node02 node03&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># check</span></span><br><span class="line">$ ceph fs ls</span><br><span class="line"></span><br><span class="line"><span class="comment"># check fs with admin config</span></span><br><span class="line">$ ceph -m 10.0.2.4:6789 --id admin --key=AQCEKzthORrmJhAA3PH7m+9kldDLLRQXuscofg== -c /etc/ceph/ceph.conf fs ls --format=json</span><br></pre></td></tr></table></figure>
-
-<h3 id="Deploy-rgw-Ceph-Object-Storage"><a href="#Deploy-rgw-Ceph-Object-Storage" class="headerlink" title="Deploy rgw (Ceph Object Storage)"></a>Deploy rgw (Ceph Object Storage)</h3><ul>
-<li>Create Realm, Zonegroup, Zone  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># radosgw-admin realm create --rgw-realm=&lt;realm-name&gt; --default</span></span><br><span class="line">$ radosgw-admin realm create --rgw-realm=testenv --default</span><br><span class="line"><span class="comment"># radosgw-admin zonegroup create --rgw-zonegroup=&lt;zonegroup-name&gt;  --master --default</span></span><br><span class="line">$ radosgw-admin zonegroup create --rgw-zonegroup=muc --master --default</span><br><span class="line"><span class="comment"># radosgw-admin zone create --rgw-zonegroup=&lt;zonegroup-name&gt; --rgw-zone=&lt;zone-name&gt; --master --default</span></span><br><span class="line">$ radosgw-admin zone create --rgw-zonegroup=muc --rgw-zone=room1 --master --default</span><br><span class="line"><span class="comment"># This will generate .rgw.root</span></span><br></pre></td></tr></table></figure></li>
-<li>Create rgw service  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a single instance service on node03</span></span><br><span class="line">$ ceph orch apply rgw myrgw --realm_name=testenv --placement=<span class="string">&quot;1 node03&quot;</span> --port=7480 --zone_name=room1</span><br><span class="line"><span class="comment"># This will generate:</span></span><br><span class="line"><span class="comment"># room1.rgw.log</span></span><br><span class="line"><span class="comment"># room1.rgw.control</span></span><br><span class="line"><span class="comment"># room1.rgw.meta</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Use-ceph-storage-inside-a-k8s-cluster"><a href="#Use-ceph-storage-inside-a-k8s-cluster" class="headerlink" title="Use ceph storage inside a k8s cluster"></a>Use ceph storage inside a k8s cluster</h2><h3 id="CephRBD-use-ceph-block-storage-in-k8s"><a href="#CephRBD-use-ceph-block-storage-in-k8s" class="headerlink" title="CephRBD (use ceph block storage in k8s)"></a>CephRBD (use ceph block storage in k8s)</h3><ul>
-<li><p>prepare ceph pool</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a pool for block storage</span></span><br><span class="line">$ ceph osd pool create kubernetes</span><br><span class="line"><span class="comment"># create user (not working, use admin instead, and update csi-rbd-secret.yaml the keyring)</span></span><br><span class="line">$ ceph auth get-or-create client.kubernetes mon <span class="string">&#x27;profile rbd&#x27;</span> osd <span class="string">&#x27;profile rbd pool=kubernetes&#x27;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>prepare rbd dynamic provisioner and plugin</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># refer to https://github.com/ceph/ceph-csi/tree/devel/deploy/rbd/kubernetes</span></span><br><span class="line">$ kubectl apply -f ceph-block-provisioner/deploy/ -n ceph</span><br></pre></td></tr></table></figure></li>
-<li><p>test dynamic provisioning of rbd of block mode</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f test-raw-block-pvc.yaml</span><br><span class="line">$ kubectl apply -f test-raw-block-pod.yaml</span><br></pre></td></tr></table></figure></li>
-<li><p>test dynamic provisioning of rbd of filesystem mode</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f test-filesystem-pvc.yaml</span><br><span class="line">$ kubectl apply -f test-filesystem-pod.yaml</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>Note</strong>: </p>
+          <h1 id="Cephadm"><a href="#Cephadm" class="headerlink" title="Cephadm"></a>Cephadm</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This note is about how to install cep cluster with cephadm.</p>
 <ul>
-<li>ERROR: MountVolume.SetUp failed for volume “registration-dir” : hostPath type check failed: /var/lib/kubelet/plugins_registry/ is not a directory.<br><strong>change kubelet dir to <code>/data/kubelet</code></strong> if you install k8s with binary and set kubelet folder as <code>/data/kubelet</code> (ignore it when installing with kubeadm)</li>
-<li>rbd-plugin is a daemonset, add tolerations to deploy to all nodes  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tolerations:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">key:</span> <span class="string">&quot;master&quot;</span></span><br><span class="line">    <span class="attr">value:</span> <span class="string">&quot;prometheus&quot;</span></span><br><span class="line">    <span class="attr">effect:</span> <span class="string">&quot;NoSchedule&quot;</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">key:</span> <span class="string">&quot;master&quot;</span></span><br><span class="line">    <span class="attr">value:</span> <span class="string">&quot;nowork&quot;</span></span><br><span class="line">    <span class="attr">effect:</span> <span class="string">&quot;NoSchedule&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>What are the preparations for the installation</li>
+<li>How to install components</li>
+<li>Basic usage</li>
 </ul>
-</li>
-</ul>
-<h3 id="CephFS-use-cephfs-in-k8s"><a href="#CephFS-use-cephfs-in-k8s" class="headerlink" title="CephFS (use cephfs in k8s)"></a>CephFS (use cephfs in k8s)</h3><ul>
-<li><p>prepare cephfs server</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create pool for data and metadata </span></span><br><span class="line">$ ceph osd pool create cephfs1_data 64 64</span><br><span class="line">$ ceph osd pool create cephfs1_metadata 64 64</span><br><span class="line"><span class="comment"># create a fs</span></span><br><span class="line">$ ceph fs new cephfs-demo1 cephfs1_metadata cephfs1_data</span><br><span class="line"><span class="comment"># update placement</span></span><br><span class="line">$ ceph orch apply mds cephfs-demo1 --placement=<span class="string">&quot;3 node01 node02 node03&quot;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>prepare cephfs dynamic provisioner and plugin </p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># refer to https://github.com/ceph/ceph-csi/tree/devel/deploy/cephfs/kubernetes</span></span><br><span class="line">$ kubectl apply -f cephfs-provisioner/deploy/ -n ceph</span><br><span class="line"></span><br><span class="line"><span class="comment"># test cephfs pvc</span></span><br><span class="line">kubectl apply -f test_pvc.yaml</span><br><span class="line">kubectl apply -f test_pvc_pod.yaml</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="Ceph-Object-Storage"><a href="#Ceph-Object-Storage" class="headerlink" title="Ceph Object Storage"></a>Ceph Object Storage</h3><ul>
-<li>Create a user  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ radosgw-admin user create --uid=yuanjing --display-name=Yuanjing</span><br></pre></td></tr></table></figure></li>
-<li>Create a bucket<ul>
-<li>command: s3cmd  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd --configure</span><br><span class="line"><span class="comment"># have the follwing configurations, configurations are saved in </span></span><br><span class="line">Access Key: &lt;Key&gt;</span><br><span class="line">Secret Key: &lt;Secret&gt;</span><br><span class="line">Default Region: US</span><br><span class="line">S3 Endpoint: 10.0.2.5:7480</span><br><span class="line">DNS-style bucket+hostname:port template <span class="keyword">for</span> accessing a bucket: 10.0.2.5:7480/%(bucket)s</span><br><span class="line">Encryption password: </span><br><span class="line">Path to GPG program: /usr/bin/gpg</span><br><span class="line">Use HTTPS protocol: False</span><br><span class="line">HTTP Proxy server name: </span><br><span class="line">HTTP Proxy server port: 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># create a bucket</span></span><br><span class="line">$ s3cmd mb s3://demo-bucket</span><br><span class="line"><span class="comment"># upload a file</span></span><br><span class="line">$ s3cmd put file.py s3://demo-bucket</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h2 id="Trouble-shooting"><a href="#Trouble-shooting" class="headerlink" title="Trouble shooting"></a>Trouble shooting</h2><ol>
-<li>416[invalidrange] -&gt; mon_max_pg_per_osd when putting object to bucket <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ceph config <span class="built_in">set</span> mon mon_max_pg_per_osd 1000</span><br></pre></td></tr></table></figure>
-<strong>Note</strong>:</li>
-</ol>
-<p>Ceph RBD and CephFS both supports filesystem</p>
-<ul>
-<li>ceph rbd: supports the volume shared by pods running on the same node, low latency, good I/O</li>
-<li>cephfs: supports the volume shared by pods running across multiple nodes, higher latency, good I/O, expecially for large files, but bottleneck with more storage</li>
-</ul>
-<h4 id="References"><a href="#References" class="headerlink" title="References"></a>References</h4><ol>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zjz20/p/14136349.html">https://www.cnblogs.com/zjz20/p/14136349.html</a></li>
-<li><a target="_blank" rel="noopener" href="https://dylanyang.top/post/2021/05/15/k8s%E4%BD%BF%E7%94%A8ceph-csi%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8cephfs/">https://dylanyang.top/post/2021/05/15/k8s%E4%BD%BF%E7%94%A8ceph-csi%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8cephfs/</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/leejia/2583381">https://blog.51cto.com/leejia/2583381</a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.ceph.com/en/octopus/rbd/rbd-kubernetes/">https://docs.ceph.com/en/octopus/rbd/rbd-kubernetes/</a></li>
-<li><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">https://kubernetes.io/docs/concepts/storage/persistent-volumes/</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/renlixing/3134294">https://blog.51cto.com/renlixing/3134294</a>    (ceph and ceph comparison)</li>
-<li><a target="_blank" rel="noopener" href="https://xiebiao.top/post/storage/ceph_octopus_ops/">https://xiebiao.top/post/storage/ceph_octopus_ops/</a> (cephadm)</li>
-<li><a target="_blank" rel="noopener" href="https://docs.ceph.com/en/mimic/man/8/radosgw-admin/">https://docs.ceph.com/en/mimic/man/8/radosgw-admin/</a> (radosgw-admin)</li>
-<li><a target="_blank" rel="noopener" href="https://docs.ceph.com/en/latest/radosgw/s3/python/">https://docs.ceph.com/en/latest/radosgw/s3/python/</a> (boto s3)</li>
-<li><a target="_blank" rel="noopener" href="https://knowledgebase.45drives.com/kb/kb450422-configuring-ceph-object-storage-to-use-multiple-data-pools/">https://knowledgebase.45drives.com/kb/kb450422-configuring-ceph-object-storage-to-use-multiple-data-pools/</a> (placement)</li>
-<li><a target="_blank" rel="noopener" href="https://ci-jie.github.io/2019/08/24/Ceph-Object-Storage-Placement-%E4%BB%8B%E7%B4%B9/">https://ci-jie.github.io/2019/08/24/Ceph-Object-Storage-Placement-%E4%BB%8B%E7%B4%B9/</a> (placement)</li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/05/cephadm/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1272,6 +1215,108 @@
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/1970/01/01/ceph-crushrule/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/luck.jpg">
+      <meta itemprop="name" content="Yuanjing Liu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuanjing's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/1970/01/01/ceph-crushrule/" class="post-title-link" itemprop="url">Ceph - crushmap and crushrule</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 1970-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="1970-01-01T00:00:00+00:00">1970-01-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-11-20 19:45:33" itemprop="dateModified" datetime="2022-11-20T19:45:33+00:00">2022-11-20</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ceph/" itemprop="url" rel="index"><span itemprop="name">ceph</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>65</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This note is to introduce the crushrule feature in ceph storage</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/1970/01/01/ceph-crushrule/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
 
 </div>
   </main>
@@ -1294,14 +1339,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">67k</span>
+    <span title="Symbols count total">88k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">1:01</span>
+    <span title="Reading time total">1:20</span>
   </span>
 </div>
 
